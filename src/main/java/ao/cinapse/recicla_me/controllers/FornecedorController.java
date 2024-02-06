@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/fornecedor")
+@RequestMapping("fornecedor")
 public class FornecedorController extends BaseController<ResponseBody, FornecedorDTO, UUID> {
 
     @Autowired

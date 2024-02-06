@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ivandro.sousa
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("user")
 public class UsuarioController extends BaseController<ResponseBody, UsuarioDTO, UUID>  
 {
     @Autowired
