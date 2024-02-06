@@ -50,7 +50,7 @@ public class ConfiguracaoSeguranca
         security
                 .csrf( crsf -> crsf.disable())
                 .authorizeHttpRequests( authorize -> {
-                    authorize.requestMatchers("/auth/**").permitAll();
+                    authorize.requestMatchers("/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll();
                     authorize.anyRequest().authenticated();
                 })
                 .exceptionHandling( exceptionHandling -> exceptionHandling.accessDeniedPage("/auth/unauthorized"))
