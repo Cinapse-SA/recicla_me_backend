@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"ao.cinapse.recicla_me.controllers.auth","ao.cinapse.recicla_me.controllers"})
 public class ReciclaMeApplication {
 
 	public static void main(String[] args) {
