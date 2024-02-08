@@ -30,8 +30,8 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author ivandro.sousa
  */
-@RequestMapping("/auth")
 @RestController
+@RequestMapping("auth")
 public class AuthController extends ResponseControllerUtils
 {
     @Autowired
