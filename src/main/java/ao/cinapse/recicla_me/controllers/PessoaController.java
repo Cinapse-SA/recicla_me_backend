@@ -21,29 +21,29 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ivandro.sousa
  */
 
-//@RestController
-//@RequestMapping("pessoa")
-public class PessoaController// extends BaseController<ResponseBody, PessoaDTO, UUID>
+@RestController
+@RequestMapping("pessoa")
+public class PessoaController extends BaseController<ResponseBody, PessoaDTO, UUID>
 {
-    //@Override
+    @Override
     public ResponseEntity<ResponseBody> listar( @PageableDefault(size = 100, page = 0) Pageable page )
     {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    //@Override
+    @Override
     public ResponseEntity<ResponseBody> salvar(PessoaDTO dto)
     {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    //@Override
+    @Override
     public ResponseEntity<ResponseBody> editar(UUID id, PessoaDTO dto)
     {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    //@Override
+    @Override
     public ResponseEntity<ResponseBody> deletar(UUID id)
     {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
