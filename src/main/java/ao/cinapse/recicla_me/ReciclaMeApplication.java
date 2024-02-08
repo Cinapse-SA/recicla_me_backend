@@ -1,11 +1,14 @@
 package ao.cinapse.recicla_me;
 
+import ao.cinapse.recicla_me.security.JwtService;
+import ao.cinapse.recicla_me.services.implementacao.PessoaServiceImpl;
+import ao.cinapse.recicla_me.services.implementacao.UsuarioServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@SpringBootApplication(scanBasePackages = {"ao.cinapse.recicla_me.controllers.auth","ao.cinapse.recicla_me.controllers"})
+@SpringBootApplication
 public class ReciclaMeApplication {
 
 	public static void main(String[] args) {
@@ -16,4 +19,5 @@ public class ReciclaMeApplication {
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
 }
