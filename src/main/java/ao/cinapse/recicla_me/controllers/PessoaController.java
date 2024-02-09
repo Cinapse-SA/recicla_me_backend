@@ -7,6 +7,8 @@ package ao.cinapse.recicla_me.controllers;
 import ao.cinapse.recicla_me.http.ResponseBody;
 import ao.cinapse.recicla_me.http.dtos.PessoaDTO;
 import java.util.UUID;
+
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("pessoa")
+@SecurityRequirement(name="BearerAuth")
 public class PessoaController extends BaseController<ResponseBody, PessoaDTO, UUID>
 {
     @Override
