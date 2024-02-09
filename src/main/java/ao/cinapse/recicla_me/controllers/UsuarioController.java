@@ -39,7 +39,6 @@ public class UsuarioController extends BaseController<ResponseBody, UsuarioDTO, 
     private UsuarioDTO UsuarioDTO;
     
     @Override
-    @GetMapping
     public ResponseEntity<ResponseBody> listar( @PageableDefault(size = 100, page = 0) Pageable page )
     {
         return this.ok(

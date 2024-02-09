@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public abstract class BaseController<Response,DTO, ID> extends ResponseControllerUtils 
 {
     @GetMapping

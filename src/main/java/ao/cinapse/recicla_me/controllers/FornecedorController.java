@@ -24,7 +24,6 @@ public class FornecedorController extends BaseController<ResponseBody, Fornecedo
     private FornecedorServiceImpl service;
 
     @Override
-    @GetMapping
     public ResponseEntity<ResponseBody> listar(Pageable page) {
         return this.ok(
             "Lista de Fornecedores.",

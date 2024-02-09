@@ -19,6 +19,7 @@ public class SwaggerConfiguracao
       return GroupedOpenApi.builder()
               .group("ao.cinapse")
               .pathsToMatch("/**")
+              .packagesToScan("ao.cinapse.recicla_me.controllers")
               .build();
     }
 }
