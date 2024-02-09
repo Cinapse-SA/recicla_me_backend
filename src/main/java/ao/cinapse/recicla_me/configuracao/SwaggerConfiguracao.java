@@ -1,6 +1,7 @@
 package ao.cinapse.recicla_me.configuracao;
 
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.annotations.OpenAPI30;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.servers.Server;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 @Configuration
+@OpenAPI30
 public class SwaggerConfiguracao
 {
 
