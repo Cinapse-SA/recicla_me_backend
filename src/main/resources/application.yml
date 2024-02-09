@@ -1,24 +1,4 @@
 spring:
   profiles:
-    default: local
-    active: local
-  jpa:
-    generate-ddl: 'true'
-    show-sql: 'true'
-    hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-  datasource:
-    database: railway
-    password: f**g2cbBAaG3F22Bdf6f-GgF1CB2b64d
-    username: postgres
-    url: jdbc:postgresql://postgres:f**g2cbBAaG3F22Bdf6f-GgF1CB2b64d@monorail.proxy.rlwy.net:24277
-security:
-  jwt:
-    secret-key: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
-    expiration-time: '864000000'
-server:
-  servlet:
-    encoding:
-      charset: UTF-8
-    context-path: /api-recicla
+    default: railway-dev
+    active: railway-dev
