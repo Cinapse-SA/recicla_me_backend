@@ -29,7 +29,9 @@ import java.util.List;
                 version = "1.0",
                 license = @License(name = "Licence", url = "https://cinapse.ao"),
                 termsOfService = "Termos e Condições"
-        ),
+        )
+        /*
+        ,
         servers = {
             @Server(
                 description = "Local Environment",
@@ -40,6 +42,7 @@ import java.util.List;
                 url = "https://reciclame-api-dev.up.railway.app"
             )
         }
+         */
 )
 @SecurityScheme(
     name = "BearerAuth",
