@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("pessoa")
-@SecurityRequirement(name="BearerAuth")
+@RequestMapping("/pessoa")
+//@SecurityRequirement(name="BearerAuth")
 public class PessoaController extends BaseController<ResponseBody, PessoaDTO, UUID>
 {
     @Override

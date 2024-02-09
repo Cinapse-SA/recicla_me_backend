@@ -13,8 +13,3 @@ spring:
     show-sql: 'true'
     hibernate:
       ddl-auto: update
-server:
-  servlet:
-    encoding:
-      charset: UTF-8
-  port: '17043'

@@ -44,6 +44,7 @@ import java.util.List;
         }
          */
 )
+/*
 @SecurityScheme(
     name = "BearerAuth",
     description = "Jwt Auth description",
@@ -52,6 +53,7 @@ import java.util.List;
     bearerFormat = "JWT",
     in = SecuritySchemeIn.HEADER
 )
+ */
 public class SwaggerConfiguracao
 {
 

@@ -76,8 +76,7 @@ public class UsuarioFilterMiddleware extends OncePerRequestFilter
                 this.handlerExceptionResolver.resolveException(request, response, null, ex);
             }
         }
-        
-
+        filterChain.doFilter(request, response);
     }
 
 }
