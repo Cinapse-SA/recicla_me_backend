@@ -18,6 +18,7 @@ import ao.cinapse.recicla_me.services.implementacao.UsuarioServiceImpl;
 
 import java.util.Optional;
 
+import io.swagger.v3.oas.models.annotations.OpenAPI30;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
