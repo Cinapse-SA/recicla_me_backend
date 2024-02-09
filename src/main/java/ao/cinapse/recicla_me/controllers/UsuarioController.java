@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ivandro.sousa
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("user")
 public class UsuarioController extends BaseController<ResponseBody, UsuarioDTO, UUID>  
 {
     @Autowired
@@ -38,6 +39,7 @@ public class UsuarioController extends BaseController<ResponseBody, UsuarioDTO, 
     private UsuarioDTO UsuarioDTO;
     
     @Override
+    @GetMapping
     public ResponseEntity<ResponseBody> listar( @PageableDefault(size = 100, page = 0) Pageable page )
     {
         return this.ok(
