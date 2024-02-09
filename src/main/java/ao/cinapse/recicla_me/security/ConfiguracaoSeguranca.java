@@ -29,8 +29,6 @@ public class ConfiguracaoSeguranca
     private UsuarioFilterMiddleware usuarioFilterMiddleware;
 
 
-
-
     @Bean
     public CorsConfigurationSource habilitarCors()
     {
