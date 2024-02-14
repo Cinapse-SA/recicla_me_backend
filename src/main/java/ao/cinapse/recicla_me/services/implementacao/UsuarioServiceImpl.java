@@ -44,7 +44,8 @@ public class UsuarioServiceImpl extends AbstractService<Usuario, UUID> implement
     }
     
     @Override
-    public Usuario  criar(Usuario entidade) throws Exception {
+    public Usuario  criar(Usuario entidade) throws Exception
+    {
         if ( this.findByTelefone( entidade.getTelefone()).isPresent() )
             throw new Exception("Telefone do utilizador já cadastrado.");
         if ( this.findByUsername( entidade.getUsername()).isPresent() )

@@ -69,7 +69,6 @@ public class UsuarioFilterMiddleware extends OncePerRequestFilter
                         System.err.println("Token valid -> "+user);
                     }
                 }
-                filterChain.doFilter(request, response);
             }
             catch (Exception ex) {
                 System.err.println("Exceptionn -> "+ex.getMessage());

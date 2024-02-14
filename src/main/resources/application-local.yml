@@ -8,8 +8,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/recicla_me
     password: postgres
   jpa:
-    generate-ddl: 'true'
+    generate-ddl: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: 'true'
+    show-sql: true
     hibernate:
       ddl-auto: update

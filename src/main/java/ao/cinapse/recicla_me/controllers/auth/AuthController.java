@@ -13,6 +13,7 @@ import ao.cinapse.recicla_me.models.TipoUsuario;
 import ao.cinapse.recicla_me.models.Usuario;
 import ao.cinapse.recicla_me.security.GerenciadorAutenticacao;
 import ao.cinapse.recicla_me.security.JwtService;
+import ao.cinapse.recicla_me.services.implementacao.FornecedorServiceImpl;
 import ao.cinapse.recicla_me.services.implementacao.TipoUsuarioServiceImpl;
 import ao.cinapse.recicla_me.services.implementacao.UsuarioServiceImpl;
 
@@ -37,6 +38,8 @@ public class AuthController extends ResponseControllerUtils
 {
     @Autowired
     private UsuarioServiceImpl service;
+    @Autowired
+    private FornecedorServiceImpl fornecedorService;
     @Autowired
     private JwtService jwtService;
 
@@ -65,9 +68,13 @@ public class AuthController extends ResponseControllerUtils
         {
             Usuario usuario = dto.cast();
             usuario.setIdTipoUsuario(tipoUsuarioOp.get());
+
+            usuario = this.service.criar(usuario);
+            this.fornecedorService.criarPorUsuario( usuario );
+
             return this.ok(
                 "Utilizador criado com sucesso.",
-                this.service.criar(usuario)
+                usuario
             );
         }
         catch (Exception e)
