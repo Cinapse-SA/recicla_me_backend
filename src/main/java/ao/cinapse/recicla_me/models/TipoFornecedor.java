@@ -1,15 +1,13 @@
 package ao.cinapse.recicla_me.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -41,5 +39,20 @@ public class TipoFornecedor implements Serializable {
         this.codigo = codigo;
         this.denominacao = denominacao;
         this.descricao = descricao;
+    }
+
+
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    @Column(nullable = true)
+    private LocalDateTime deletedAt;
+
+
+    @PrePersist
+    public void init() {
+        if ( this.createdAt == null )
+            this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 }

@@ -5,14 +5,16 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
 @Setter
 @ToString
 @Entity(name = "fornecedor")
-public class Fornecedor {
-
+public class Fornecedor implements Serializable
+{
     @Id
     @GeneratedValue
     private UUID idFornecedor;
@@ -28,5 +30,18 @@ public class Fornecedor {
     private TipoFornecedor idTipoFornecedor;
 
 
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    @Column(nullable = true)
+    private LocalDateTime deletedAt;
+
+
+    @PrePersist
+    public void init() {
+        if ( this.createdAt == null )
+            this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
 
 }

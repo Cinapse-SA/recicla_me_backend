@@ -4,10 +4,10 @@
  */
 package ao.cinapse.recicla_me.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,8 +20,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Entity
-public class Pessoa
+@Entity(name = "pessoa")
+public class Pessoa implements Serializable
 {
     @Id
     @GeneratedValue
@@ -29,5 +29,19 @@ public class Pessoa
     @Column(name = "nome", nullable = false)
     private String nome;
     @Column(name = "nif", nullable = false)
-    private String nif;      
+    private String nif;
+
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    @Column(nullable = true)
+    private LocalDateTime deletedAt;
+
+
+    @PrePersist
+    public void init() {
+        if ( this.createdAt == null )
+            this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
 }

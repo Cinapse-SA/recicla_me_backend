@@ -4,11 +4,10 @@
  */
 package ao.cinapse.recicla_me.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +21,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Entity
+@Entity(name = "tipo_usuario")
 public class TipoUsuario implements Serializable
 { 
     @Id
@@ -45,5 +44,19 @@ public class TipoUsuario implements Serializable
         this.idTipoUsuario = idTipoUsuario;
         this.denominacao = denominacao;
         this.codigo = codigo;
+    }
+
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    @Column(nullable = true)
+    private LocalDateTime deletedAt;
+
+
+    @PrePersist
+    public void init() {
+        if ( this.createdAt == null )
+            this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 }

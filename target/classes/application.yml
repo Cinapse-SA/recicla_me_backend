@@ -5,5 +5,5 @@ server:
     context-path: /api-recicla
 spring:
   profiles:
-    default: railway-dev
-    active: railway-dev
+    default: heroku
+    active: heroku
