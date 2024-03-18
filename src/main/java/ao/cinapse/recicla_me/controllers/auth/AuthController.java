@@ -17,6 +17,7 @@ import ao.cinapse.recicla_me.services.implementacao.FornecedorServiceImpl;
 import ao.cinapse.recicla_me.services.implementacao.TipoUsuarioServiceImpl;
 import ao.cinapse.recicla_me.services.implementacao.UsuarioServiceImpl;
 
+import java.text.ParseException;
 import java.util.Optional;
 
 import io.swagger.v3.oas.models.annotations.OpenAPI30;
@@ -103,6 +104,8 @@ public class AuthController extends ResponseControllerUtils
         }
         catch ( EntityNotFoundException | BadCredentialsException ex ) {
             return this.badRequest(ex.getMessage(), null);
+        } catch (ParseException e) {
+            return this.badRequest(e.getMessage(), null);
         }
     }
 

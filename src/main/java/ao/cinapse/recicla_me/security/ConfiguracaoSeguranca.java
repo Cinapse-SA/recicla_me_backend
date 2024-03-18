@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -23,6 +24,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 @Configuration
+@EnableWebSecurity
 public class ConfiguracaoSeguranca
 {
     @Autowired
@@ -48,8 +50,8 @@ public class ConfiguracaoSeguranca
         security
                 .csrf( crsf -> crsf.disable())
                 .authorizeHttpRequests( authorize -> {
-                    authorize.requestMatchers("/auth/**", "/swagger-ui/**", "/v3/**").permitAll();
-                    authorize.anyRequest().authenticated();
+                    authorize.requestMatchers("/auth/**", "/swagger-ui/**", "/v3/**").permitAll()
+                            .anyRequest().authenticated();
                 })
                 .exceptionHandling( exceptionHandling -> exceptionHandling.accessDeniedPage("/auth/unauthorized"))
                 .httpBasic( basicConfigs -> {

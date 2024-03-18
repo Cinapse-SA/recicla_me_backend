@@ -7,3 +7,11 @@ spring:
   profiles:
     default: heroku
     active: heroku
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          servlet:
+            handler:
+              HandlerMappingIntrospector: ERROR

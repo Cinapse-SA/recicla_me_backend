@@ -11,6 +11,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.function.Function;
@@ -35,7 +41,7 @@ public class JwtService
         return claimsResolver.apply( claims );
     }
 
-    public String gerarToken(Usuario usuario) {
+    public String gerarToken(Usuario usuario) throws ParseException {
         HashMap<String, Object> claims = new HashMap<>();
         claims.put("idUsuario", usuario.getIdUsuario());
         claims.put("username", usuario.getUsername());
@@ -51,18 +57,17 @@ public class JwtService
         return gerarToken(claims, usuario);
     }
 
-    private String gerarToken(HashMap<String, Object> extraClaims, UserDetails userDetails)
-    {
+    private String gerarToken(HashMap<String, Object> extraClaims, UserDetails userDetails) throws ParseException {
         return buildToken(extraClaims, userDetails, Long.parseLong(expirationTime));
     }
 
-    private String buildToken(HashMap<String, Object> extraClaims, UserDetails userDetails, long expirationTime) {
+    private String buildToken(HashMap<String, Object> extraClaims, UserDetails userDetails, long expirationTime) throws ParseException {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
+                .setIssuedAt( asDate(LocalDate.now() ) )
+                .setExpiration( asDate(LocalDate.now().plusDays(10L)) )
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -97,5 +102,25 @@ public class JwtService
 
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
+    }
+
+
+
+
+
+    public Date asDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    public Date asDate(LocalDateTime localDateTime) {
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    public LocalDate asLocalDate(Date date) {
+        return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    public LocalDateTime asLocalDateTime(Date date) {
+        return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 }
