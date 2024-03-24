@@ -35,7 +35,17 @@ public class ResponseControllerUtils
         responseBody.setCode(HttpStatus.BAD_REQUEST.value());
         return ResponseEntity.ok( responseBody );
     }
-    
+
+    public ResponseEntity<ResponseBody> serverError( String mensagem, Object data) {
+        ResponseBody responseBody = new ResponseBody();
+        responseBody.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+        responseBody.setData( data );
+        responseBody.setMensagem( mensagem );
+        responseBody.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return ResponseEntity.ok( responseBody );
+    }
+
+
     public ResponseEntity<ResponseBody> naoEncontrado( String mensagem, Object data) {
         ResponseBody responseBody = new ResponseBody();
         responseBody.setStatus(HttpStatus.NOT_FOUND);

@@ -56,13 +56,6 @@ public class FornecedorDTO extends AbstractDTO<Fornecedor, FornecedorDTO>
 
     @Override
     public Fornecedor cast() {
-        Fornecedor entity = new Fornecedor();
-        BeanUtils.copyProperties(this, entity);
-
-        entity.setIdFornecedor(this.id);
-        entity.setIdTipoFornecedor( new TipoFornecedorDTO().cast(this.tipoFornecedor) );
-        entity.setIdPessoa( new PessoaDTO().cast(this.pessoa) );
-
-        return entity;
+        return this.cast(this);
     }
 }

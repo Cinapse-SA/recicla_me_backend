@@ -3,37 +3,36 @@ package ao.cinapse.recicla_me.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Entity(name = "categoria_material")
 @Getter
 @Setter
 @ToString
-@Entity(name = "tipo_fornecedor")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TipoFornecedor implements Serializable {
+public class TipoMaterial {
 
     @Id
     @GeneratedValue
-    private UUID idTipoFornecedor;
-
-    @Column(nullable = false)
-    private String codigo;
+    private UUID idTipoMaterial;
 
     @Column(nullable = false)
     private String denominacao;
 
+    @Column(nullable = false)
+    private String codigo;
+
     @Column(nullable = true)
     private String descricao;
+
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     @Column(nullable = true)
     private LocalDateTime deletedAt;
-
 
     @PrePersist
     public void init() {

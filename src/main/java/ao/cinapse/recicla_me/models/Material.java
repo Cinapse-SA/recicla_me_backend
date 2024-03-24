@@ -14,7 +14,6 @@ import java.util.UUID;
 @ToString
 @Entity(name = "material")
 public class Material implements Serializable {
-
     @Id
     @GeneratedValue
     private UUID idMaterial;
@@ -23,7 +22,11 @@ public class Material implements Serializable {
     private Double preco;
     private Double peso;
     private String image;
+    private String codigo;
 
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "idTipoMaterial", name = "id_tipo_material", nullable = false)
+    private TipoMaterial idTipoMaterial;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

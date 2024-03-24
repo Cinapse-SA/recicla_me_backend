@@ -17,4 +17,8 @@ public class Enums
     public enum TipoFornecedor {
         PEQUENO_FORNECEDOR, MEDIO_FORNECEDOR, GRANDE_FORNECEDOR
     };
+
+    public enum TipoMaterial {
+        PLASTICO, FERRO, VIDRO, PAPELAO, MADEIRA
+    }
 }
