@@ -80,6 +80,7 @@ public class AuthController extends ResponseControllerUtils
         }
         catch (Exception e)
         {
+            e.printStackTrace();
             return this.badRequest(
                     e.getMessage(),
                 dto

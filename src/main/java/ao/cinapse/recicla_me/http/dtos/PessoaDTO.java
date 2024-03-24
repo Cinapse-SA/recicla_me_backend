@@ -56,7 +56,10 @@ public class PessoaDTO extends AbstractDTO<Pessoa, PessoaDTO>
     @Override
     public Pessoa cast()
     {
-        return this.cast(this);
+        Pessoa pessoa = new Pessoa();
+        BeanUtils.copyProperties(this, pessoa);
+        pessoa.setIdPessoa( this.getId() );
+        return pessoa;
     }
     
 }

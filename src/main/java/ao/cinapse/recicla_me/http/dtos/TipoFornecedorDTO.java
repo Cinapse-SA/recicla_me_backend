@@ -40,6 +40,9 @@ public class TipoFornecedorDTO extends AbstractDTO<TipoFornecedor, TipoFornecedo
 
     @Override
     public TipoFornecedor cast() {
-        return this.cast(this);
+        TipoFornecedor entity = new TipoFornecedor();
+        BeanUtils.copyProperties(this, entity);
+        entity.setIdTipoFornecedor( this.getId() );
+        return entity;
     }
 }

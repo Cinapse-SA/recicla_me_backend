@@ -21,4 +21,8 @@ public class Enums
     public enum TipoMaterial {
         PLASTICO, FERRO, VIDRO, PAPELAO, MADEIRA
     }
+
+    public enum UnidadeMedida {
+        Kg, Ton, grama
+    }
 }

@@ -60,8 +60,8 @@ public class UsuarioController extends BaseController<ResponseBody, UsuarioDTO, 
             Usuario usuario = dto.cast();
             usuario.setIdTipoUsuario( tipoUsuarioOp.get() );
             return this.ok(
-            "Utilizador criado com sucesso.",  
-            this.service.criar( usuario )
+                "Utilizador criado com sucesso.",
+                this.service.criar( usuario )
             );
         }
         catch (Exception e) 

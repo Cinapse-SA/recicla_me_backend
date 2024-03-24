@@ -42,6 +42,9 @@ public class TipoMaterialDTO extends AbstractDTO<TipoMaterial, TipoMaterialDTO>
 
     @Override
     public TipoMaterial cast() {
-        return this.cast(this);
+        TipoMaterial tipoMaterial = TipoMaterial.builder().build();
+        BeanUtils.copyProperties(this, tipoMaterial);
+        tipoMaterial.setIdTipoMaterial(this.getId());
+        return tipoMaterial;
     }
 }

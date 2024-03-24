@@ -73,7 +73,11 @@ public class UsuarioDTO extends AbstractDTO<Usuario, UsuarioDTO>
     @Override
     public Usuario cast()
     {
-        return this.cast(this);
+        Usuario usuario = new Usuario();
+        BeanUtils.copyProperties(this, usuario);
+        usuario.setIdPessoa( this.getPessoa() );
+        usuario.setIdTipoUsuario( this.getTipoUsuario() );
+        return usuario;
     }
 
 }

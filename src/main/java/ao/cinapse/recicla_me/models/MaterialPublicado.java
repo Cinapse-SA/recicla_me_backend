@@ -21,6 +21,7 @@ public class MaterialPublicado implements Serializable {
 
     @Column(nullable = false)
     private Double preco;
+
     @Column(nullable = false)
     private Double peso;
 
@@ -28,8 +29,8 @@ public class MaterialPublicado implements Serializable {
     private String image;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "idMaterial", name = "id_material", nullable = false)
-    private Material idMaterial;
+    @JoinColumn(referencedColumnName = "idMaterialReciclavel", name = "id_material_reciclavel", nullable = false)
+    private MaterialReciclavel idMaterialReciclavel;
 
     @ManyToOne
     @JoinColumn(referencedColumnName = "idPublicacao", name = "id_publicacao", nullable = false)
