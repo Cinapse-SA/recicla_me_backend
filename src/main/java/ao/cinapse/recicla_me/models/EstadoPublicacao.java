@@ -1,9 +1,7 @@
 package ao.cinapse.recicla_me.models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -13,6 +11,9 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class EstadoPublicacao implements Serializable
 {
     @Id

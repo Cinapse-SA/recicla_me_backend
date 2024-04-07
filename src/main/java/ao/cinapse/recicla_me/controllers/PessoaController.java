@@ -4,18 +4,17 @@
  */
 package ao.cinapse.recicla_me.controllers;
 
+import ao.cinapse.recicla_me.controllers.base.BaseController;
 import ao.cinapse.recicla_me.http.ResponseBody;
 import ao.cinapse.recicla_me.http.dtos.PessoaDTO;
 import java.util.UUID;
 
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import ao.cinapse.recicla_me.models.Pessoa;
+import ao.cinapse.recicla_me.services.implementacao.PessoaServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 /**
@@ -26,8 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/pessoa")
 //@SecurityRequirement(name="BearerAuth")
-public class PessoaController extends BaseController<ResponseBody, PessoaDTO, UUID>
+public class PessoaController extends BaseController<
+    ResponseBody,
+    PessoaDTO,
+    Pessoa,
+    UUID,
+    PessoaServiceImpl>
 {
+
     @Override
     public ResponseEntity<ResponseBody> listar( @PageableDefault(size = 100, page = 0) Pageable page )
     {

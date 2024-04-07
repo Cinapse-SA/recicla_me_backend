@@ -7,9 +7,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ResponseControllerUtils
+public class ResponseControllerUtils<Response>
 {
-    public ResponseEntity<ResponseBody> created( String mensagem, Object data) {
+    public ResponseEntity<ResponseBody> created( String mensagem, Response data) {
         ResponseBody responseBody = new ResponseBody();
         responseBody.setStatus(HttpStatus.CREATED);
         responseBody.setData( data );
@@ -18,7 +18,7 @@ public class ResponseControllerUtils
         return ResponseEntity.status( HttpStatus.CREATED).body(responseBody );
     }
     
-    public ResponseEntity<ResponseBody> ok( String mensagem, Object data) {
+    public ResponseEntity<ResponseBody> ok( String mensagem, Response data) {
         ResponseBody responseBody = new ResponseBody();
         responseBody.setStatus(HttpStatus.OK);
         responseBody.setData( data );
@@ -27,7 +27,7 @@ public class ResponseControllerUtils
         return ResponseEntity.ok( responseBody );
     }
     
-    public ResponseEntity<ResponseBody> badRequest( String mensagem, Object data) {
+    public ResponseEntity<ResponseBody> badRequest( String mensagem, Response data) {
         ResponseBody responseBody = new ResponseBody();
         responseBody.setStatus(HttpStatus.BAD_REQUEST);
         responseBody.setData( data );
@@ -36,7 +36,7 @@ public class ResponseControllerUtils
         return ResponseEntity.ok( responseBody );
     }
 
-    public ResponseEntity<ResponseBody> serverError( String mensagem, Object data) {
+    public ResponseEntity<ResponseBody> serverError( String mensagem, Response data) {
         ResponseBody responseBody = new ResponseBody();
         responseBody.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         responseBody.setData( data );
@@ -46,13 +46,22 @@ public class ResponseControllerUtils
     }
 
 
-    public ResponseEntity<ResponseBody> naoEncontrado( String mensagem, Object data) {
+    public ResponseEntity<ResponseBody> naoEncontrado( String mensagem, Response data) {
         ResponseBody responseBody = new ResponseBody();
         responseBody.setStatus(HttpStatus.NOT_FOUND);
         responseBody.setData( data );
         responseBody.setMensagem( mensagem );
         responseBody.setCode(HttpStatus.NOT_FOUND.value());
         return ResponseEntity.status( HttpStatus.NOT_FOUND ).body(responseBody );
+    }
+
+    public ResponseEntity<ResponseBody> excepctationFailed( String mensagem, Response data) {
+        ResponseBody responseBody = new ResponseBody();
+        responseBody.setStatus(HttpStatus.EXPECTATION_FAILED);
+        responseBody.setData( data );
+        responseBody.setMensagem( mensagem );
+        responseBody.setCode(HttpStatus.EXPECTATION_FAILED.value());
+        return ResponseEntity.status( HttpStatus.EXPECTATION_FAILED ).body(responseBody );
     }
 
     public ResponseEntity<ResponseBody> unauthorized( String mensagem) {

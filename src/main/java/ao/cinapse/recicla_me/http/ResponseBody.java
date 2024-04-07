@@ -1,8 +1,6 @@
 package ao.cinapse.recicla_me.http;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
@@ -12,6 +10,9 @@ import java.util.HashMap;
 @Setter
 @Getter
 @ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResponseBody
 {
     private HttpStatus status;

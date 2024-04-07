@@ -1,7 +1,10 @@
 package ao.cinapse.recicla_me.controllers;
 
+import ao.cinapse.recicla_me.controllers.base.BaseController;
 import ao.cinapse.recicla_me.http.ResponseBody;
 import ao.cinapse.recicla_me.http.dtos.MaterialReciclavelDTO;
+import ao.cinapse.recicla_me.models.MaterialReciclavel;
+import ao.cinapse.recicla_me.services.MaterialReciclavelService;
 import ao.cinapse.recicla_me.services.implementacao.MaterialReciclavelServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -13,20 +16,22 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("material-reciclavel")
-public class MaterialReciclavelController extends BaseController<ResponseBody, MaterialReciclavelDTO, UUID>
+public class MaterialReciclavelController extends BaseController<
+    ResponseBody,
+    MaterialReciclavelDTO,
+    MaterialReciclavel,
+    UUID,
+    MaterialReciclavelServiceImpl>
 {
     @Autowired
-    private MaterialReciclavelServiceImpl service;
-    @Autowired
     private MaterialReciclavelDTO parser;
-
 
     @Override
     public ResponseEntity<ResponseBody> listar(Pageable page)
     {
         return this.ok(
         "Lista de Materias Reciclaveis",
-            this.parser.toListFromEntityList( this.service.findAll() )
+            this.parser.toListFromEntityList( this.getService().findAll() )
         );
     }
 

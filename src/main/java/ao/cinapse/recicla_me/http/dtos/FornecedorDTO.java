@@ -7,9 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +17,9 @@ import java.util.UUID;
 @Setter
 @ToString
 @Component
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class FornecedorDTO extends AbstractDTO<Fornecedor, FornecedorDTO>
 {
     private UUID id;

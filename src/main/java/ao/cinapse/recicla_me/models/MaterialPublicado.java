@@ -1,11 +1,11 @@
 package ao.cinapse.recicla_me.models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -13,6 +13,9 @@ import java.util.UUID;
 @Setter
 @ToString
 @Entity(name = "material_publicado")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class MaterialPublicado implements Serializable {
 
     @Id
@@ -25,8 +28,8 @@ public class MaterialPublicado implements Serializable {
     @Column(nullable = false)
     private Double peso;
 
-    @Column(nullable = true)
-    private String image;
+    @OneToMany(mappedBy = "idMaterialPublicado")
+    private List<MaterialPublicadoArquivo> images;
 
     @ManyToOne
     @JoinColumn(referencedColumnName = "idMaterialReciclavel", name = "id_material_reciclavel", nullable = false)

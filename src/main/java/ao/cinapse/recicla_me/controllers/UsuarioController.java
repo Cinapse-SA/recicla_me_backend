@@ -4,6 +4,7 @@
  */
 package ao.cinapse.recicla_me.controllers;
 
+import ao.cinapse.recicla_me.controllers.base.BaseController;
 import ao.cinapse.recicla_me.http.ResponseBody;
 import ao.cinapse.recicla_me.http.dtos.UsuarioDTO;
 import ao.cinapse.recicla_me.models.TipoUsuario;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
@@ -16,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,23 +27,17 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/user")
-public class UsuarioController extends BaseController<ResponseBody, UsuarioDTO, UUID>  
+public class UsuarioController extends BaseController<ResponseBody, UsuarioDTO, Usuario, UUID, UsuarioServiceImpl>
 {
     @Autowired
-    private UsuarioServiceImpl service;
-    
-    @Autowired
     private TipoUsuarioServiceImpl tipoUsuarioServiceImpl;
-    
-    @Autowired
-    private UsuarioDTO UsuarioDTO;
-    
+
     @Override
     public ResponseEntity<ResponseBody> listar( @PageableDefault(size = 100, page = 0) Pageable page )
     {
         return this.ok(
         "Lista de utilizadores.", 
-            this.service.findAllPaginado(page)
+            this.getService().findAllPaginado(page)
         );
     }
 
@@ -61,7 +55,7 @@ public class UsuarioController extends BaseController<ResponseBody, UsuarioDTO, 
             usuario.setIdTipoUsuario( tipoUsuarioOp.get() );
             return this.ok(
                 "Utilizador criado com sucesso.",
-                this.service.criar( usuario )
+                this.getService().criar( usuario )
             );
         }
         catch (Exception e) 
