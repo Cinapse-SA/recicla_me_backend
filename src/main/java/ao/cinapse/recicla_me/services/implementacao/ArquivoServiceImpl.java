@@ -47,6 +47,7 @@ public class ArquivoServiceImpl extends AbstractService<Arquivo, UUID> implement
                     .fileName(filename)
                     .folder( root.toString() )
                     .fileExtension(partsFilename[1])
+                    .file(finalPath.toString())
                     .size(String.valueOf(file.getSize())+" bytes")
                     .path(finalPath.toString())
                     .build();
