@@ -30,6 +30,7 @@ public abstract class BaseController<
     @Autowired
     private Service service;
 
+
     public Service getService() {
         return service;
     }
@@ -46,6 +47,7 @@ public abstract class BaseController<
     
     @PostMapping
     public ResponseEntity<Response> salvar(@RequestBody DTO dto) {
+        System.err.println(dto);
         try
         {
             E parsevalue = ((AbstractDTO<E, DTO>)dto).cast(dto);
@@ -53,6 +55,7 @@ public abstract class BaseController<
             return ok("Entidade criada com sucesso.", ((AbstractDTO<E,DTO>)dto).parse(entidade));
         }
         catch (Exception e) {
+            e.printStackTrace();
             return serverError("Não foi possível salvar o registro.", e.getMessage());
         }
     }

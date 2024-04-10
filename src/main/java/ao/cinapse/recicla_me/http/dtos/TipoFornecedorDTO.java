@@ -3,9 +3,7 @@ package ao.cinapse.recicla_me.http.dtos;
 import ao.cinapse.recicla_me.models.TipoFornecedor;
 import ao.cinapse.recicla_me.models.TipoUsuario;
 import jakarta.persistence.Column;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +12,9 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-@Component
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TipoFornecedorDTO extends AbstractDTO<TipoFornecedor, TipoFornecedorDTO>
 {
     private UUID id;

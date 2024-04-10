@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
 
+@Component
 public abstract class AbstractDTO<E, D> implements Serializable
 {
     public abstract E cast(D dto);

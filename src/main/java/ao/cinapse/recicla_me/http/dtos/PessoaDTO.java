@@ -8,9 +8,8 @@ import ao.cinapse.recicla_me.models.Pessoa;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
+import lombok.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +20,9 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @ToString
-@Component
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PessoaDTO extends AbstractDTO<Pessoa, PessoaDTO>
 {
     private UUID id;

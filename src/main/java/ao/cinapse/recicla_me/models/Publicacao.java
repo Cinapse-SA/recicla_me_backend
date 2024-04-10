@@ -27,23 +27,30 @@ public class Publicacao implements Serializable
     private Double custoTotal;
 
     private LocalDateTime horarioRecolha;
+
+    private String endereco;
     private String latitude;
     private String longitude;
 
     @ManyToOne
     @JoinColumn(referencedColumnName = "idFornecedor", name = "id_fornecedor", nullable = false)
     private Fornecedor idFornecedor;
+
     @ManyToOne
     @JoinColumn(referencedColumnName = "idEstadoPublicacao", name = "id_estado_publicacao", nullable = false)
     private EstadoPublicacao idEstadoPublicacao;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    @Column(nullable = true)
-    private LocalDateTime deletedAt;
 
     @OneToMany(mappedBy = "idPublicacao")
     private List<MaterialPublicado> materialPublicadoList;
 
+    @OneToMany(mappedBy = "idPublicacao")
+    private List<PontoRecolha> pontoRecolhaList;
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    @Column(nullable = true)
+    private LocalDateTime deletedAt;
 
     @PrePersist
     public void init() {

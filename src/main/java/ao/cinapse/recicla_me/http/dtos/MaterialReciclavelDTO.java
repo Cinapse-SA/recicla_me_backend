@@ -37,8 +37,10 @@ public class MaterialReciclavelDTO extends AbstractDTO<MaterialReciclavel, Mater
         BeanUtils.copyProperties(dto, materialReciclavel);
 
         materialReciclavel.setIdMaterialReciclavel(dto.getId());
-        materialReciclavel.setIdTipoMaterial( new TipoMaterialDTO().cast( dto.getTipoMaterial()) );
-        materialReciclavel.setIdUnidadeMedida(new UnidadeMedidaDTO().cast(dto.getUnidadeMedida()) );
+        if ( dto.getTipoMaterial() != null)
+            materialReciclavel.setIdTipoMaterial( new TipoMaterialDTO().cast( dto.getTipoMaterial()) );
+        if (dto.getUnidadeMedida() != null)
+            materialReciclavel.setIdUnidadeMedida(new UnidadeMedidaDTO().cast(dto.getUnidadeMedida()) );
         return materialReciclavel;
     }
 
@@ -48,8 +50,10 @@ public class MaterialReciclavelDTO extends AbstractDTO<MaterialReciclavel, Mater
         BeanUtils.copyProperties(entity, materialReciclavelDTO);
 
         materialReciclavelDTO.setId(entity.getIdMaterialReciclavel());
-        materialReciclavelDTO.setTipoMaterial((new TipoMaterialDTO().parse(entity.getIdTipoMaterial()) ));
-        materialReciclavelDTO.setUnidadeMedida( new UnidadeMedidaDTO().parse(entity.getIdUnidadeMedida()) );
+        if ( entity.getIdTipoMaterial() != null)
+            materialReciclavelDTO.setTipoMaterial((new TipoMaterialDTO().parse(entity.getIdTipoMaterial()) ));
+        if ( entity.getIdUnidadeMedida() != null )
+            materialReciclavelDTO.setUnidadeMedida( new UnidadeMedidaDTO().parse(entity.getIdUnidadeMedida()) );
         return materialReciclavelDTO;
     }
 
@@ -59,8 +63,10 @@ public class MaterialReciclavelDTO extends AbstractDTO<MaterialReciclavel, Mater
         BeanUtils.copyProperties(this, materialReciclavel);
 
         materialReciclavel.setIdMaterialReciclavel(this.getId());
-        materialReciclavel.setIdTipoMaterial( new TipoMaterialDTO().cast( this.getTipoMaterial()) );
-        materialReciclavel.setIdUnidadeMedida(new UnidadeMedidaDTO().cast(this.getUnidadeMedida()) );
+        if ( this.getTipoMaterial() != null)
+            materialReciclavel.setIdTipoMaterial( new TipoMaterialDTO().cast( this.getTipoMaterial()) );
+        if ( this.getUnidadeMedida() != null)
+            materialReciclavel.setIdUnidadeMedida(new UnidadeMedidaDTO().cast(this.getUnidadeMedida()) );
         return materialReciclavel;
     }
 }

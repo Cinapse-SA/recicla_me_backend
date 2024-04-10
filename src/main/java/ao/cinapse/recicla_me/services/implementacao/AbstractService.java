@@ -5,6 +5,7 @@
 package ao.cinapse.recicla_me.services.implementacao;
 
 import ao.cinapse.recicla_me.models.Fornecedor;
+import ao.cinapse.recicla_me.security.UsuarioLogadoService;
 import ao.cinapse.recicla_me.services.IAbstractService;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;

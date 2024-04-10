@@ -1,12 +1,16 @@
 package ao.cinapse.recicla_me.services.implementacao;
 
+import ao.cinapse.recicla_me.http.dtos.MaterialPublicadoDTO;
 import ao.cinapse.recicla_me.http.dtos.PublicacaoDTO;
+import ao.cinapse.recicla_me.models.MaterialPublicado;
 import ao.cinapse.recicla_me.models.Publicacao;
+import ao.cinapse.recicla_me.security.UsuarioLogadoService;
 import ao.cinapse.recicla_me.services.PublicacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -15,14 +19,37 @@ public class PublicacaoServiceImpl extends AbstractService<Publicacao, UUID> imp
     @Autowired
     private MaterialPublicadoServiceImpl materialPublicadoService;
     @Autowired
+    protected UsuarioLogadoService usuarioLogadoService;
+    @Autowired
     private MaterialPublicadoArquivoServiceImpl materialPublicadoArquivoService;
+    @Autowired
+    private PontoRecolhaServiceImpl pontoRecolhaService;
+
 
     @Override
     @Transactional
     public Publicacao criar(Publicacao entidade) throws Exception
     {
         Publicacao entity = super.criar(entidade);
-        
+        entidade.getMaterialPublicadoList().forEach( item -> {
+            item.setIdPublicacao(entity);
+            try {
+                this.materialPublicadoService.criar(item);
+            }
+            catch (Exception ex) {
+                System.err.println("Salvar Material Publicado -> "+ex.getMessage());
+            }
+        });
+
+        entidade.getPontoRecolhaList().forEach( item -> {
+            item.setIdPublicacao(entity);
+            try {
+                 this.pontoRecolhaService.criar(item);
+            }
+            catch (Exception ex) {
+                System.err.println("Salvar Ponto de Recolha -> "+ex.getMessage());
+            }
+        });
         return entity;
     }
 

@@ -33,8 +33,10 @@ public class FornecedorDTO extends AbstractDTO<Fornecedor, FornecedorDTO>
         BeanUtils.copyProperties(dto, entity);
 
         entity.setIdFornecedor(dto.getId());
-        entity.setIdTipoFornecedor( new TipoFornecedorDTO().cast(dto.getTipoFornecedor()) );
-        entity.setIdPessoa( new PessoaDTO().cast(dto.getPessoa()) );
+        if ( dto.getTipoFornecedor() != null)
+            entity.setIdTipoFornecedor( new TipoFornecedorDTO().cast(dto.getTipoFornecedor()) );
+        if ( dto.getPessoa() != null)
+            entity.setIdPessoa( new PessoaDTO().cast(dto.getPessoa()) );
 
         return entity;
     }
@@ -45,12 +47,11 @@ public class FornecedorDTO extends AbstractDTO<Fornecedor, FornecedorDTO>
         FornecedorDTO dto = new FornecedorDTO();
         BeanUtils.copyProperties(entity, dto);
 
-        PessoaDTO pessoaDTO = new PessoaDTO().parse(entity.getIdPessoa());
-        TipoFornecedorDTO tipoFornecedorDTO = new TipoFornecedorDTO().parse(entity.getIdTipoFornecedor());
-
         dto.setId( entity.getIdFornecedor() );
-        dto.setPessoa(pessoaDTO);
-        dto.setTipoFornecedor(tipoFornecedorDTO);
+        if ( entity.getIdPessoa() != null)
+            dto.setPessoa(PessoaDTO.builder().build().parse(entity.getIdPessoa()));
+        if ( entity.getIdTipoFornecedor() != null)
+            dto.setTipoFornecedor(TipoFornecedorDTO.builder().build().parse(entity.getIdTipoFornecedor()));
 
         return dto;
     }
@@ -61,8 +62,10 @@ public class FornecedorDTO extends AbstractDTO<Fornecedor, FornecedorDTO>
         BeanUtils.copyProperties(this, entity);
 
         entity.setIdFornecedor(this.getId());
-        entity.setIdTipoFornecedor( new TipoFornecedorDTO().cast(this.getTipoFornecedor()) );
-        entity.setIdPessoa( new PessoaDTO().cast(this.getPessoa()) );
+        if ( this.getTipoFornecedor() != null )
+            entity.setIdTipoFornecedor( new TipoFornecedorDTO().cast(this.getTipoFornecedor()) );
+        if ( this.getPessoa() != null)
+            entity.setIdPessoa( new PessoaDTO().cast(this.getPessoa()) );
 
         return entity;
     }

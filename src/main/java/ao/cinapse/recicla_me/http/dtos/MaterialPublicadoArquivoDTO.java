@@ -25,7 +25,8 @@ public class MaterialPublicadoArquivoDTO extends AbstractDTO<MaterialPublicadoAr
     @Override
     public MaterialPublicadoArquivo cast(MaterialPublicadoArquivoDTO dto) {
         MaterialPublicadoArquivo entity = MaterialPublicadoArquivo.builder().build();
-        entity.setIdArquivo( ArquivoDTO.builder().build().cast(dto.getArquivo()) );
+        if ( dto.getArquivo() != null )
+            entity.setIdArquivo( ArquivoDTO.builder().build().cast(dto.getArquivo()) );
         entity.setIdMaterialPublicadoArquivo(dto.getId());
         return entity;
     }
@@ -33,7 +34,8 @@ public class MaterialPublicadoArquivoDTO extends AbstractDTO<MaterialPublicadoAr
     @Override
     public MaterialPublicadoArquivoDTO parse(MaterialPublicadoArquivo entity) {
         MaterialPublicadoArquivoDTO dto = MaterialPublicadoArquivoDTO.builder().build();
-        dto.setArquivo(ArquivoDTO.builder().build().parse(entity.getIdArquivo()));
+        if ( entity.getIdArquivo() != null)
+            dto.setArquivo(ArquivoDTO.builder().build().parse(entity.getIdArquivo()));
         dto.setId(entity.getIdMaterialPublicadoArquivo());
         return dto;
     }
@@ -41,7 +43,8 @@ public class MaterialPublicadoArquivoDTO extends AbstractDTO<MaterialPublicadoAr
     @Override
     public MaterialPublicadoArquivo cast() {
         MaterialPublicadoArquivo entity = MaterialPublicadoArquivo.builder().build();
-        entity.setIdArquivo( ArquivoDTO.builder().build().cast(this.getArquivo()) );
+        if ( this.getArquivo() != null)
+            entity.setIdArquivo( ArquivoDTO.builder().build().cast(this.getArquivo()) );
         entity.setIdMaterialPublicadoArquivo(this.getId());
         return entity;
     }

@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -29,12 +30,12 @@ public class MaterialPublicadoDTO extends AbstractDTO<MaterialPublicado, Materia
     public MaterialPublicado cast(MaterialPublicadoDTO dto) {
         MaterialPublicado entity = MaterialPublicado.builder().build();
         BeanUtils.copyProperties(dto, entity);
-
         entity.setIdMaterialPublicado(dto.getId());
-        entity.setIdMaterialReciclavel( MaterialReciclavelDTO.builder().build().cast(dto.getMaterialReciclavel()));
 
-        MaterialPublicadoArquivoDTO parse = MaterialPublicadoArquivoDTO.builder().build();
-        entity.setImages( parse.toListFromDtoList( dto.getImages()) );
+        if ( dto.getMaterialReciclavel() != null )
+            entity.setIdMaterialReciclavel( MaterialReciclavelDTO.builder().build().cast(dto.getMaterialReciclavel()));
+        if (dto.getImages() != null )
+            entity.setImages( MaterialPublicadoArquivoDTO.builder().build().toListFromDtoList( dto.getImages()) );
         return entity;
     }
 
@@ -42,11 +43,10 @@ public class MaterialPublicadoDTO extends AbstractDTO<MaterialPublicado, Materia
     public MaterialPublicadoDTO parse(MaterialPublicado entity) {
         MaterialPublicadoDTO dto = MaterialPublicadoDTO.builder().build();
         BeanUtils.copyProperties(entity, dto);
-
-        dto.setMaterialReciclavel(MaterialReciclavelDTO.builder().build().parse(entity.getIdMaterialReciclavel()));
-
-        MaterialPublicadoArquivoDTO parse = MaterialPublicadoArquivoDTO.builder().build();
-        dto.setImages(parse.toListFromEntityList(entity.getImages()));
+        if ( entity.getIdMaterialReciclavel() != null)
+            dto.setMaterialReciclavel(MaterialReciclavelDTO.builder().build().parse(entity.getIdMaterialReciclavel()));
+        if ( entity.getImages() != null )
+            dto.setImages(MaterialPublicadoArquivoDTO.builder().build().toListFromEntityList(entity.getImages()));
         return dto;
     }
 
@@ -56,10 +56,10 @@ public class MaterialPublicadoDTO extends AbstractDTO<MaterialPublicado, Materia
         BeanUtils.copyProperties(this, entity);
 
         entity.setIdMaterialPublicado(this.getId());
-        entity.setIdMaterialReciclavel( MaterialReciclavelDTO.builder().build().cast(this.getMaterialReciclavel()));
-
-        MaterialPublicadoArquivoDTO parse = MaterialPublicadoArquivoDTO.builder().build();
-        entity.setImages( parse.toListFromDtoList( this.getImages()) );
+        if ( this.getMaterialReciclavel() != null)
+            entity.setIdMaterialReciclavel( MaterialReciclavelDTO.builder().build().cast(this.getMaterialReciclavel()));
+        if ( this.getImages() != null)
+            entity.setImages( MaterialPublicadoArquivoDTO.builder().build().toListFromDtoList( this.getImages()) );
         return entity;
     }
 }

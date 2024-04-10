@@ -1,5 +1,6 @@
 package ao.cinapse.recicla_me.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -37,6 +38,7 @@ public class MaterialPublicado implements Serializable {
 
     @ManyToOne
     @JoinColumn(referencedColumnName = "idPublicacao", name = "id_publicacao", nullable = false)
+    @JsonIgnore
     private Publicacao idPublicacao;
 
     private LocalDateTime createdAt;

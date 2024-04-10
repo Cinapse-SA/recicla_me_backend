@@ -29,17 +29,19 @@ public class PublicacaoDTO extends AbstractDTO<Publicacao, PublicacaoDTO>
     private FornecedorDTO fornecedor;
     private EstadoPublicacaoDTO estado;
     private List<MaterialPublicadoDTO> items;
+    private List<PontoRecolhaDTO> pontosRecolha;
 
     @Override
     public Publicacao cast(PublicacaoDTO dto)
     {
         Publicacao publicacao = Publicacao.builder().build();
         BeanUtils.copyProperties(dto, publicacao);
-        publicacao.setIdPublicacao( dto.getId() );
 
-        publicacao.setIdFornecedor(FornecedorDTO.builder().build().cast(dto.getFornecedor()));
-        publicacao.setIdEstadoPublicacao(EstadoPublicacaoDTO.builder().build().cast(dto.getEstado()));
+        publicacao.setIdPublicacao( dto.getId() );
+        publicacao.setIdFornecedor(Fornecedor.builder().idFornecedor( this.getFornecedor().getId() ).build());
+        publicacao.setIdEstadoPublicacao(EstadoPublicacao.builder().idEstadoPublicacao( this.getEstado().getId()).build());
         publicacao.setMaterialPublicadoList( MaterialPublicadoDTO.builder().build().toListFromDtoList(dto.getItems()));
+        publicacao.setPontoRecolhaList( PontoRecolhaDTO.builder().build().toListFromDtoList(dto.getPontosRecolha()));
 
         return publicacao;
     }
@@ -53,6 +55,8 @@ public class PublicacaoDTO extends AbstractDTO<Publicacao, PublicacaoDTO>
         dto.setFornecedor(FornecedorDTO.builder().build().parse( entity.getIdFornecedor() ));
         dto.setEstado(EstadoPublicacaoDTO.builder().build().parse(entity.getIdEstadoPublicacao()));
         dto.setItems( MaterialPublicadoDTO.builder().build().toListFromEntityList(entity.getMaterialPublicadoList()));
+        dto.setPontosRecolha(PontoRecolhaDTO.builder().build().toListFromEntityList(entity.getPontoRecolhaList()));
+
         return dto;
     }
 
@@ -65,6 +69,7 @@ public class PublicacaoDTO extends AbstractDTO<Publicacao, PublicacaoDTO>
         publicacao.setIdFornecedor(FornecedorDTO.builder().build().cast(this.getFornecedor()));
         publicacao.setIdEstadoPublicacao(EstadoPublicacaoDTO.builder().build().cast(this.getEstado()));
         publicacao.setMaterialPublicadoList( MaterialPublicadoDTO.builder().build().toListFromDtoList(this.getItems()));
+        publicacao.setPontoRecolhaList( PontoRecolhaDTO.builder().build().toListFromDtoList(this.getPontosRecolha()));
         return publicacao;
     }
 }
