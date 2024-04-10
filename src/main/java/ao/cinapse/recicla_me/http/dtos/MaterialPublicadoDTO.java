@@ -47,6 +47,7 @@ public class MaterialPublicadoDTO extends AbstractDTO<MaterialPublicado, Materia
             dto.setMaterialReciclavel(MaterialReciclavelDTO.builder().build().parse(entity.getIdMaterialReciclavel()));
         if ( entity.getImages() != null )
             dto.setImages(MaterialPublicadoArquivoDTO.builder().build().toListFromEntityList(entity.getImages()));
+        dto.setId(entity.getIdMaterialPublicado());
         return dto;
     }
 
