@@ -38,10 +38,14 @@ public class PublicacaoDTO extends AbstractDTO<Publicacao, PublicacaoDTO>
         BeanUtils.copyProperties(dto, publicacao);
 
         publicacao.setIdPublicacao( dto.getId() );
-        publicacao.setIdFornecedor(Fornecedor.builder().idFornecedor( this.getFornecedor().getId() ).build());
-        publicacao.setIdEstadoPublicacao(EstadoPublicacao.builder().idEstadoPublicacao( this.getEstado().getId()).build());
-        publicacao.setMaterialPublicadoList( MaterialPublicadoDTO.builder().build().toListFromDtoList(dto.getItems()));
-        publicacao.setPontoRecolhaList( PontoRecolhaDTO.builder().build().toListFromDtoList(dto.getPontosRecolha()));
+        if ( dto.getFornecedor() != null )
+            publicacao.setIdFornecedor(FornecedorDTO.builder().build().cast(dto.getFornecedor()));
+        if ( dto.getEstado() != null )
+            publicacao.setIdEstadoPublicacao(EstadoPublicacaoDTO.builder().build().cast( dto.getEstado()));
+        if ( dto.getItems() != null )
+            publicacao.setMaterialPublicadoList( MaterialPublicadoDTO.builder().build().toListFromDtoList(dto.getItems()));
+        if (dto.getPontosRecolha() != null)
+            publicacao.setPontoRecolhaList( PontoRecolhaDTO.builder().build().toListFromDtoList(dto.getPontosRecolha()));
 
         return publicacao;
     }
@@ -51,6 +55,7 @@ public class PublicacaoDTO extends AbstractDTO<Publicacao, PublicacaoDTO>
         PublicacaoDTO dto = PublicacaoDTO.builder().build();
         BeanUtils.copyProperties(entity, dto);
         dto.setId( entity.getIdPublicacao() );
+
 
         dto.setFornecedor(FornecedorDTO.builder().build().parse( entity.getIdFornecedor() ));
         dto.setEstado(EstadoPublicacaoDTO.builder().build().parse(entity.getIdEstadoPublicacao()));

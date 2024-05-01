@@ -25,9 +25,4 @@ public class PublicacaoController extends BaseController<ResponseBody, Publicaca
     public ResponseEntity<ResponseBody> listar(Pageable page) {
         return this.ok("Lista de Publicações", PublicacaoDTO.builder().build().toListFromEntityList(this.getService().findAll()));
     }
-
-    @Override
-    public ResponseEntity<ResponseBody> salvar(PublicacaoDTO dto) {
-        return super.salvar(dto);
-    }
 }
