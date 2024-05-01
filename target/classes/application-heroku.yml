@@ -4,9 +4,9 @@ security:
     secret-key: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
 spring:
   datasource:
-    username: isousa_reciclame
+    username: imagikfx_reciclame
     url: jdbc:mysql://160.119.240.230:3306/isousa_reciclame?createDatabaseIfNotExist=true
-    password: Cinapse@2024
+    password: reciclame
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     generate-ddl: true
