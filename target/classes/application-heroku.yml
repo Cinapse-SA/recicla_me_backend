@@ -5,7 +5,7 @@ security:
 spring:
   datasource:
     username: imagikfx_reciclame
-    url: jdbc:mysql://160.119.240.230:3306/isousa_reciclame?createDatabaseIfNotExist=true
+    url: jdbc:mysql://160.119.240.230:3306/imagikfx_reciclame?createDatabaseIfNotExist=true
     password: reciclame
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
