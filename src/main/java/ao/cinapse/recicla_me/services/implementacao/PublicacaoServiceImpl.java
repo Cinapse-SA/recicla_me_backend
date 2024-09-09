@@ -35,8 +35,9 @@ public class PublicacaoServiceImpl extends AbstractService<Publicacao, UUID> imp
     {
         Fornecedor fornecedor = this.usuarioLogadoService.getFornecedor();
 
-        entidade.setIdEstadoPublicacao( estadoPublicacaoService.getByCodigo(Enums.EstadoPublicacao.Novo.toString()) );
         entidade.setIdFornecedor(fornecedor);
+        entidade.setIdEstadoPublicacao( estadoPublicacaoService.getByCodigo(Enums.EstadoPublicacao.Novo.toString()) );
+
         Publicacao entity = super.criar(entidade);
 
         entidade.getMaterialPublicadoList().forEach( item -> {
