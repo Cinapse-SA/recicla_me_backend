@@ -2,6 +2,7 @@ package ao.cinapse.recicla_me.services.implementacao;
 
 import ao.cinapse.recicla_me.http.dtos.MaterialPublicadoDTO;
 import ao.cinapse.recicla_me.http.dtos.PublicacaoDTO;
+import ao.cinapse.recicla_me.models.Fornecedor;
 import ao.cinapse.recicla_me.models.MaterialPublicado;
 import ao.cinapse.recicla_me.models.Publicacao;
 import ao.cinapse.recicla_me.security.UsuarioLogadoService;
@@ -28,13 +29,16 @@ public class PublicacaoServiceImpl extends AbstractService<Publicacao, UUID> imp
     @Autowired
     private EstadoPublicacaoServiceImpl estadoPublicacaoService;
 
-
     @Override
     @Transactional
     public Publicacao criar(Publicacao entidade) throws Exception
     {
-        entidade.setIdEstadoPublicacao( estadoPublicacaoService.getByCodigo(Enums.EstadoPublicacao.Pendente.toString()) );
+        Fornecedor fornecedor = this.usuarioLogadoService.getFornecedor();
+
+        entidade.setIdEstadoPublicacao( estadoPublicacaoService.getByCodigo(Enums.EstadoPublicacao.Novo.toString()) );
+        entidade.setIdFornecedor(fornecedor);
         Publicacao entity = super.criar(entidade);
+
         entidade.getMaterialPublicadoList().forEach( item -> {
             item.setIdPublicacao(entity);
             try {
