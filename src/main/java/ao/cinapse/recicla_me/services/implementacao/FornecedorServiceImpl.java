@@ -35,6 +35,6 @@ public class FornecedorServiceImpl extends AbstractService<Fornecedor, UUID> imp
 
     @Override
     public Optional<Fornecedor> findByIdPessoa(Pessoa pessoa) throws Exception {
-        return this.getRepository().findByIdPessoa( pessoa.getIdPessoa() );
+        return this.getRepository().findByIdPessoa( pessoa );
     }
 }
