@@ -44,9 +44,10 @@ public class PublicacaoDTO extends AbstractDTO<Publicacao, PublicacaoDTO>
             publicacao.setIdEstadoPublicacao(EstadoPublicacaoDTO.builder().build().cast( dto.getEstado()));
         if ( dto.getItems() != null )
             publicacao.setMaterialPublicadoList( MaterialPublicadoDTO.builder().build().toListFromDtoList(dto.getItems()));
+/*
         if (dto.getPontosRecolha() != null)
             publicacao.setPontoRecolhaList( PontoRecolhaDTO.builder().build().toListFromDtoList(dto.getPontosRecolha()));
-
+*/
         return publicacao;
     }
 
@@ -60,7 +61,7 @@ public class PublicacaoDTO extends AbstractDTO<Publicacao, PublicacaoDTO>
         dto.setFornecedor(FornecedorDTO.builder().build().parse( entity.getIdFornecedor() ));
         dto.setEstado(EstadoPublicacaoDTO.builder().build().parse(entity.getIdEstadoPublicacao()));
         dto.setItems( MaterialPublicadoDTO.builder().build().toListFromEntityList(entity.getMaterialPublicadoList()));
-        dto.setPontosRecolha(PontoRecolhaDTO.builder().build().toListFromEntityList(entity.getPontoRecolhaList()));
+        //dto.setPontosRecolha(PontoRecolhaDTO.builder().build().toListFromEntityList(entity.getPontoRecolhaList()));
 
         return dto;
     }
