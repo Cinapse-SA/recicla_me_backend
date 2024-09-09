@@ -25,4 +25,8 @@ public class Enums
     public enum UnidadeMedida {
         Kg, Ton, grama
     }
+
+    public enum EstadoPublicacao {
+        Novo, Pendente, Por_Verificar, Recusada, Eliminada, Arquivada
+    }
 }

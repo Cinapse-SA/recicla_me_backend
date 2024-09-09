@@ -12,7 +12,6 @@ import java.util.UUID;
 public interface MaterialReciclavelService
 {
     public Optional<MaterialReciclavel> findByCodigo(String codigo);
-
     public Boolean codigoExistente( String codigo);
     public List<MaterialReciclavel> findByIdTipoMaterial(TipoMaterial idTipoMaterial);
 }

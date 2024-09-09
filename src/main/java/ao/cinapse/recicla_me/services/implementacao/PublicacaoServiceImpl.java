@@ -6,6 +6,7 @@ import ao.cinapse.recicla_me.models.MaterialPublicado;
 import ao.cinapse.recicla_me.models.Publicacao;
 import ao.cinapse.recicla_me.security.UsuarioLogadoService;
 import ao.cinapse.recicla_me.services.PublicacaoService;
+import ao.cinapse.recicla_me.utils.Enums;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,12 +25,15 @@ public class PublicacaoServiceImpl extends AbstractService<Publicacao, UUID> imp
     private MaterialPublicadoArquivoServiceImpl materialPublicadoArquivoService;
     @Autowired
     private PontoRecolhaServiceImpl pontoRecolhaService;
+    @Autowired
+    private EstadoPublicacaoServiceImpl estadoPublicacaoService;
 
 
     @Override
     @Transactional
     public Publicacao criar(Publicacao entidade) throws Exception
     {
+        entidade.setIdEstadoPublicacao( estadoPublicacaoService.getByCodigo(Enums.EstadoPublicacao.Pendente.toString()) );
         Publicacao entity = super.criar(entidade);
         entidade.getMaterialPublicadoList().forEach( item -> {
             item.setIdPublicacao(entity);

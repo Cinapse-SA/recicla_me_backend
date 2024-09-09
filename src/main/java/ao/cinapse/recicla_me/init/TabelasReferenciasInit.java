@@ -4,14 +4,8 @@
  */
 package ao.cinapse.recicla_me.init;
 
-import ao.cinapse.recicla_me.models.TipoFornecedor;
-import ao.cinapse.recicla_me.models.TipoMaterial;
-import ao.cinapse.recicla_me.models.TipoUsuario;
-import ao.cinapse.recicla_me.models.UnidadeMedida;
-import ao.cinapse.recicla_me.services.implementacao.TipoFornecedorServiceImpl;
-import ao.cinapse.recicla_me.services.implementacao.TipoMaterialServiceImpl;
-import ao.cinapse.recicla_me.services.implementacao.TipoUsuarioServiceImpl;
-import ao.cinapse.recicla_me.services.implementacao.UnidadeMedidaServiceImpl;
+import ao.cinapse.recicla_me.models.*;
+import ao.cinapse.recicla_me.services.implementacao.*;
 import ao.cinapse.recicla_me.utils.Enums;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +29,8 @@ public class TabelasReferenciasInit
     private TipoUsuarioServiceImpl tipoUsuarioService;
     @Autowired
     private UnidadeMedidaServiceImpl unidadeMedidaService;
+    @Autowired
+    private EstadoPublicacaoServiceImpl estadoPublicacaoService;
 
 
     @PostConstruct
@@ -44,6 +40,7 @@ public class TabelasReferenciasInit
         this.initTipoMaterial();
         this.initTipoUsuario();
         this.initUnidadeMedida();
+        this.initEstadoPublicacao();
     }
 
     private void initUnidadeMedida() {
@@ -112,6 +109,22 @@ public class TabelasReferenciasInit
 
     }
 
+    private void initEstadoPublicacao() {
+        for (Enums.EstadoPublicacao estado : Enums.EstadoPublicacao.values()) {
+            String codigo = this.gerarCodigo( estado.toString() );
+            if ( (this.estadoPublicacaoService.getByCodigo(codigo) == null) )
+            {
+                EstadoPublicacao estadoPublicacao = this.initEstadoPublicacao( estado );
+                try {
+                    this.estadoPublicacaoService.criar(estadoPublicacao);
+                }
+                catch (Exception ex) {
+                    Logger.getLogger(TabelasReferenciasInit.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
     public static String gerarCodigo(String tipo ) {
         return tipo.replaceAll(" ", "_");
     }
@@ -146,6 +159,14 @@ public class TabelasReferenciasInit
         return UnidadeMedida.builder()
                 .unidade(unidade.toString())
                 .codigo(gerarCodigo(unidade.toString()))
+                .build();
+    }
+
+    private EstadoPublicacao initEstadoPublicacao( Enums.EstadoPublicacao estado) {
+        return EstadoPublicacao
+                .builder()
+                .codigo( estado.toString())
+                .denominacao(estado.toString())
                 .build();
     }
 }
