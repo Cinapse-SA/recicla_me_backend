@@ -59,7 +59,17 @@ public class PontoRecolhaDTO extends AbstractDTO<PontoRecolha, PontoRecolhaDTO> 
     }
 
     @Override
-    public PontoRecolha cast() {
-        return null;
+    public PontoRecolha cast()
+    {
+        PontoRecolha entity = PontoRecolha.builder().build();
+        BeanUtils.copyProperties(this, entity);
+        if ( this.getProvincia() != null )
+            entity.setProvincia( LocalidadeDTO.builder().build().cast(this.getProvincia()));
+        if ( this.getMunicipio() != null)
+            entity.setMunicipio( LocalidadeDTO.builder().build().cast(this.getMunicipio()));
+        if ( this.getDistrito() != null )
+            entity.setDistrito( LocalidadeDTO.builder().build().cast(this.getDistrito()));
+        entity.setIdPontoRecolha(this.getId());
+        return entity;
     }
 }
