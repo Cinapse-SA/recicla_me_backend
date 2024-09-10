@@ -50,7 +50,7 @@ public class PublicacaoServiceImpl extends AbstractService<Publicacao, UUID> imp
             }
         });
 
-        /*
+
         entidade.getPontoRecolhaList().forEach( item -> {
             item.setIdPublicacao(entity);
             try {
@@ -60,7 +60,7 @@ public class PublicacaoServiceImpl extends AbstractService<Publicacao, UUID> imp
                 System.err.println("Salvar Ponto de Recolha -> "+ex.getMessage());
             }
         });
-        */
+
         return entity;
     }
 
