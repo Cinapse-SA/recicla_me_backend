@@ -29,7 +29,7 @@ public class PublicacaoDTO extends AbstractDTO<Publicacao, PublicacaoDTO>
     private FornecedorDTO fornecedor;
     private EstadoPublicacaoDTO estado;
     private List<MaterialPublicadoDTO> items;
-//    private List<PontoRecolhaDTO> pontosRecolha;
+    private List<PontoRecolhaDTO> pontosRecolha;
 
     @Override
     public Publicacao cast(PublicacaoDTO dto)
@@ -44,10 +44,10 @@ public class PublicacaoDTO extends AbstractDTO<Publicacao, PublicacaoDTO>
             publicacao.setIdEstadoPublicacao(EstadoPublicacaoDTO.builder().build().cast( dto.getEstado()));
         if ( dto.getItems() != null )
             publicacao.setMaterialPublicadoList( MaterialPublicadoDTO.builder().build().toListFromDtoList(dto.getItems()));
-/*
+
         if (dto.getPontosRecolha() != null)
             publicacao.setPontoRecolhaList( PontoRecolhaDTO.builder().build().toListFromDtoList(dto.getPontosRecolha()));
-*/
+
         return publicacao;
     }
 
@@ -75,7 +75,7 @@ public class PublicacaoDTO extends AbstractDTO<Publicacao, PublicacaoDTO>
         publicacao.setIdFornecedor(FornecedorDTO.builder().build().cast(this.getFornecedor()));
         publicacao.setIdEstadoPublicacao(EstadoPublicacaoDTO.builder().build().cast(this.getEstado()));
         publicacao.setMaterialPublicadoList( MaterialPublicadoDTO.builder().build().toListFromDtoList(this.getItems()));
-        //publicacao.setPontoRecolhaList( PontoRecolhaDTO.builder().build().toListFromDtoList(this.getPontosRecolha()));
+        publicacao.setPontoRecolhaList( PontoRecolhaDTO.builder().build().toListFromDtoList(this.getPontosRecolha()));
         return publicacao;
     }
 }

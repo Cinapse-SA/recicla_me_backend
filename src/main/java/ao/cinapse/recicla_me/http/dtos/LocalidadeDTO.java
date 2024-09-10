@@ -22,7 +22,6 @@ public class LocalidadeDTO extends AbstractDTO<Localidade, LocalidadeDTO>
     @JsonIgnore
     private Localidade idParent;
 
-
     @Override
     public Localidade cast(LocalidadeDTO dto) {
         Localidade entity = Localidade.builder().build();
