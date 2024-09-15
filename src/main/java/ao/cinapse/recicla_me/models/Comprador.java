@@ -1,6 +1,5 @@
 package ao.cinapse.recicla_me.models;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,32 +9,27 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-@Entity(name = "transportador")
+@Entity(name = "comprador")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Transportador
-{
+public class Comprador {
     @Id
     @GeneratedValue
-    private UUID idTransportador;
+    private UUID idComprador;
 
-    private String numeroTransportador;
+    private String numeroComprador;
 
     @ManyToOne
     @JoinColumn(referencedColumnName = "idPessoa", name = "id_pessoa", nullable = false)
     private Pessoa idPessoa;
 
-    @ManyToOne
-    @JoinColumn(referencedColumnName = "idTipoTransportador", name = "id_tipo_transportador", nullable = false)
-    private TipoTransportador idTipoTransportador;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     @Column(nullable = true)
     private LocalDateTime deletedAt;
-
 
     @PrePersist
     public void init() {

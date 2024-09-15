@@ -24,6 +24,8 @@ public class TabelasReferenciasInit
     @Autowired
     private TipoFornecedorServiceImpl tipoFornecedorService;
     @Autowired
+    private TipoTransportadorServiceImpl tipoTransportadorService;
+    @Autowired
     private TipoMaterialServiceImpl tipoMaterialService;
     @Autowired
     private TipoUsuarioServiceImpl tipoUsuarioService;
@@ -37,6 +39,7 @@ public class TabelasReferenciasInit
     protected void init() 
     {
         this.initTipoFornecedor();
+        this.initTipoTransportador();
         this.initTipoMaterial();
         this.initTipoUsuario();
         this.initUnidadeMedida();
@@ -106,7 +109,24 @@ public class TabelasReferenciasInit
                 }
             }
         }
+    }
 
+
+    private void initTipoTransportador()
+    {
+        for ( Enums.TipoTransportador tipo : Enums.TipoTransportador.values() )
+        {
+            String codigo = this.gerarCodigo( tipo.toString() );
+            if ( !this.tipoTransportadorService.codigoExistente(codigo) ) {
+                TipoTransportador tipoTransportador = this.initTipoTransportador( tipo );
+                try {
+                    this.tipoTransportadorService.criar(tipoTransportador);
+                }
+                catch (Exception ex) {
+                    Logger.getLogger(TabelasReferenciasInit.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     private void initEstadoPublicacao() {
@@ -137,6 +157,15 @@ public class TabelasReferenciasInit
             .denominacao( tipo.toString() )
             .build();
     }
+
+    private TipoTransportador initTipoTransportador(Enums.TipoTransportador tipo)
+    {
+        return TipoTransportador.builder()
+                .codigo( gerarCodigo(tipo.toString() ) )
+                .denominacao( tipo.toString() )
+                .build();
+    }
+
 
     private TipoMaterial initTipoMaterial(Enums.TipoMaterial tipo)
     {

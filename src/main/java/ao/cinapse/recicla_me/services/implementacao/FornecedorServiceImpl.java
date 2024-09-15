@@ -5,6 +5,7 @@ import ao.cinapse.recicla_me.models.Pessoa;
 import ao.cinapse.recicla_me.models.Usuario;
 import ao.cinapse.recicla_me.repositories.FornecedorRepository;
 import ao.cinapse.recicla_me.services.interfaces.FornecedorService;
+import ao.cinapse.recicla_me.utils.Enums;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class FornecedorServiceImpl extends AbstractService<Fornecedor, UUID> imp
         Fornecedor fornecedor = new Fornecedor();
         fornecedor.setNumeroFornecedor( usuario.getIdPessoa().getNif() );
         fornecedor.setIdPessoa(usuario.getIdPessoa());
-        fornecedor.setIdTipoFornecedor( this.tipoFornecedorService.findByCodigo("PEQUENO_FORNECEDOR").get() );
+        fornecedor.setIdTipoFornecedor( this.tipoFornecedorService.findByCodigo(Enums.TipoFornecedor.PEQUENO_FORNECEDOR.toString()).get() );
         return this.criar(fornecedor);
     }
 

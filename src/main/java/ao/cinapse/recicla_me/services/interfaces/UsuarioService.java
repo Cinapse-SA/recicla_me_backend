@@ -22,4 +22,6 @@ public interface UsuarioService extends UserDetailsService
     public Optional<Usuario> findByUsername( String username );
     public Optional<Usuario> findByEmail( String username );
     public Optional<Usuario> findByTelefone( String username );
+
+    void construirPerfil(Usuario usuario) throws Exception;
 }

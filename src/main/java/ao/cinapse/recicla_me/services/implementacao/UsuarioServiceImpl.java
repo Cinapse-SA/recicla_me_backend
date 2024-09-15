@@ -12,12 +12,14 @@ import ao.cinapse.recicla_me.services.interfaces.UsuarioService;
 import java.util.Optional;
 import java.util.UUID;
 
+import ao.cinapse.recicla_me.utils.Enums;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -43,6 +45,7 @@ public class UsuarioServiceImpl extends AbstractService<Usuario, UUID> implement
     }
     
     @Override
+    @Transactional
     public Usuario  criar(Usuario entidade) throws Exception
     {
         if ( this.findByTelefone( entidade.getTelefone()).isPresent() )
@@ -54,8 +57,10 @@ public class UsuarioServiceImpl extends AbstractService<Usuario, UUID> implement
         
         entidade.setIdPessoa( this.pessoaServiceImpl.criar(entidade.getIdPessoa()) );
         entidade.setPassword( this.passwordEncoder.encode(entidade.getPassword() ) );
-        
-        return super.criar(entidade);
+
+        Usuario usuario = super.criar(entidade);
+        this.construirPerfil( usuario );
+        return usuario;
     }
 
     @Override
@@ -73,6 +78,18 @@ public class UsuarioServiceImpl extends AbstractService<Usuario, UUID> implement
         return this.getRepository().findByTelefone( telefone );
     }
 
+    @Override
+    public void construirPerfil(Usuario usuario) throws Exception {
+        if ( usuario.getIdTipoUsuario().getCodigo().equalsIgnoreCase(Enums.TipoUsuario.FORNECEDOR.toString()) ) {
+            this.fornecedorService.criarPorUsuario(usuario);
+        }
+        else if ( usuario.getIdTipoUsuario().getCodigo().equalsIgnoreCase( Enums.TipoUsuario.TRANSPORTADOR.toString()) ) {
+            this.transportadorService.criarPorUsuario(usuario);
+        }
+        else {
+
+        }
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

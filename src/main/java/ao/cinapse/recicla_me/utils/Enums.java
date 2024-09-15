@@ -11,11 +11,15 @@ package ao.cinapse.recicla_me.utils;
 public class Enums
 {
     public enum TipoUsuario {
-        FORNECEDOR, TRANSPORTADOR
+        FORNECEDOR, TRANSPORTADOR, COMPRADOR
     };
 
     public enum TipoFornecedor {
         PEQUENO_FORNECEDOR, MEDIO_FORNECEDOR, GRANDE_FORNECEDOR
+    };
+
+    public enum TipoTransportador {
+        PEQUENO_TRANSPORTADOR, MEDIO_TRANSPORTADOR, GRANDE_TRANSPORTADOR
     };
 
     public enum TipoMaterial {
