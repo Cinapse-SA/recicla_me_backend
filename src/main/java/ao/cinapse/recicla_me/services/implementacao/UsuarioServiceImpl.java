@@ -7,19 +7,13 @@ package ao.cinapse.recicla_me.services.implementacao;
 import ao.cinapse.recicla_me.http.dtos.UsuarioDTO;
 import ao.cinapse.recicla_me.models.Usuario;
 import ao.cinapse.recicla_me.repositories.UsuarioRepository;
-import ao.cinapse.recicla_me.security.GerenciadorAutenticacao;
-import ao.cinapse.recicla_me.services.UsuarioService;
+import ao.cinapse.recicla_me.services.interfaces.UsuarioService;
 
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,6 +30,11 @@ public class UsuarioServiceImpl extends AbstractService<Usuario, UUID> implement
     private PessoaServiceImpl pessoaServiceImpl;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private TransportadorServiceImpl transportadorService;
+    @Autowired
+    private FornecedorServiceImpl fornecedorService;
 
 
     @Override

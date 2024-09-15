@@ -25,9 +25,7 @@ public class Publicacao implements Serializable
 
     private Double pesoTotal;
     private Double custoTotal;
-
     private LocalDateTime horarioRecolha;
-
     private String endereco;
     private String latitude;
     private String longitude;

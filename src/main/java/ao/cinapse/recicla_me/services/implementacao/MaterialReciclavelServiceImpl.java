@@ -3,8 +3,7 @@ package ao.cinapse.recicla_me.services.implementacao;
 import ao.cinapse.recicla_me.models.MaterialReciclavel;
 import ao.cinapse.recicla_me.models.TipoMaterial;
 import ao.cinapse.recicla_me.repositories.MaterialReciclavelRepository;
-import ao.cinapse.recicla_me.services.MaterialReciclavelService;
-import org.springframework.data.repository.Repository;
+import ao.cinapse.recicla_me.services.interfaces.MaterialReciclavelService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

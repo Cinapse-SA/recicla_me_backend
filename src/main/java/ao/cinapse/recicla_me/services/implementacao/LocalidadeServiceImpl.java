@@ -3,8 +3,7 @@ package ao.cinapse.recicla_me.services.implementacao;
 
 import ao.cinapse.recicla_me.models.Localidade;
 import ao.cinapse.recicla_me.repositories.LocalidadeRepository;
-import ao.cinapse.recicla_me.services.LocalidadeService;
-import org.springframework.data.repository.Repository;
+import ao.cinapse.recicla_me.services.interfaces.LocalidadeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

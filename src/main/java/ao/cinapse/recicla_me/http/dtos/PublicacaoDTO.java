@@ -44,7 +44,6 @@ public class PublicacaoDTO extends AbstractDTO<Publicacao, PublicacaoDTO>
             publicacao.setIdEstadoPublicacao(EstadoPublicacaoDTO.builder().build().cast( dto.getEstado()));
         if ( dto.getItems() != null )
             publicacao.setMaterialPublicadoList( MaterialPublicadoDTO.builder().build().toListFromDtoList(dto.getItems()));
-
         if (dto.getPontosRecolha() != null)
             publicacao.setPontoRecolhaList( PontoRecolhaDTO.builder().build().toListFromDtoList(dto.getPontosRecolha()));
 
@@ -52,7 +51,8 @@ public class PublicacaoDTO extends AbstractDTO<Publicacao, PublicacaoDTO>
     }
 
     @Override
-    public PublicacaoDTO parse(Publicacao entity) {
+    public PublicacaoDTO parse(Publicacao entity)
+    {
         PublicacaoDTO dto = PublicacaoDTO.builder().build();
         BeanUtils.copyProperties(entity, dto);
         dto.setId( entity.getIdPublicacao() );

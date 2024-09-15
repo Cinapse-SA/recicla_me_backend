@@ -4,21 +4,14 @@
  */
 package ao.cinapse.recicla_me.services.implementacao;
 
-import ao.cinapse.recicla_me.models.Fornecedor;
-import ao.cinapse.recicla_me.security.UsuarioLogadoService;
-import ao.cinapse.recicla_me.services.IAbstractService;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.Repository;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

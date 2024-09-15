@@ -30,13 +30,10 @@ public class Fornecedor implements Serializable
     @JoinColumn(referencedColumnName = "idTipoFornecedor", name = "id_tipo_fornecedor", nullable = false)
     private TipoFornecedor idTipoFornecedor;
 
-
-
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     @Column(nullable = true)
     private LocalDateTime deletedAt;
-
 
     @PrePersist
     public void init() {
@@ -44,5 +41,4 @@ public class Fornecedor implements Serializable
             this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
-
 }

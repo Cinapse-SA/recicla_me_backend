@@ -2,8 +2,7 @@ package ao.cinapse.recicla_me.services.implementacao;
 
 import ao.cinapse.recicla_me.models.UnidadeMedida;
 import ao.cinapse.recicla_me.repositories.UnidadeMedidaRepository;
-import ao.cinapse.recicla_me.services.UnidadeMedidaService;
-import org.springframework.data.repository.Repository;
+import ao.cinapse.recicla_me.services.interfaces.UnidadeMedidaService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

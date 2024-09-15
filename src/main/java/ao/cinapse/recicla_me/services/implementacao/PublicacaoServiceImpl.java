@@ -1,18 +1,15 @@
 package ao.cinapse.recicla_me.services.implementacao;
 
-import ao.cinapse.recicla_me.http.dtos.MaterialPublicadoDTO;
 import ao.cinapse.recicla_me.http.dtos.PublicacaoDTO;
 import ao.cinapse.recicla_me.models.Fornecedor;
-import ao.cinapse.recicla_me.models.MaterialPublicado;
 import ao.cinapse.recicla_me.models.Publicacao;
 import ao.cinapse.recicla_me.security.UsuarioLogadoService;
-import ao.cinapse.recicla_me.services.PublicacaoService;
+import ao.cinapse.recicla_me.services.interfaces.PublicacaoService;
 import ao.cinapse.recicla_me.utils.Enums;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service

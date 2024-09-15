@@ -2,8 +2,7 @@ package ao.cinapse.recicla_me.services.implementacao;
 
 import ao.cinapse.recicla_me.models.TipoFornecedor;
 import ao.cinapse.recicla_me.repositories.TipoFornecedorRepository;
-import ao.cinapse.recicla_me.services.TipoFornecedorService;
-import org.springframework.data.repository.Repository;
+import ao.cinapse.recicla_me.services.interfaces.TipoFornecedorService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

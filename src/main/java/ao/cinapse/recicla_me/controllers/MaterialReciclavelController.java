@@ -5,7 +5,6 @@ import ao.cinapse.recicla_me.http.ResponseBody;
 import ao.cinapse.recicla_me.http.dtos.MaterialReciclavelDTO;
 import ao.cinapse.recicla_me.models.MaterialReciclavel;
 import ao.cinapse.recicla_me.models.TipoMaterial;
-import ao.cinapse.recicla_me.services.MaterialReciclavelService;
 import ao.cinapse.recicla_me.services.implementacao.MaterialReciclavelServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;

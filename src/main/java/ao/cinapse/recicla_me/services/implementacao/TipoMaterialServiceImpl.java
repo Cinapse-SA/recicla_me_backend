@@ -2,7 +2,7 @@ package ao.cinapse.recicla_me.services.implementacao;
 
 import ao.cinapse.recicla_me.models.TipoMaterial;
 import ao.cinapse.recicla_me.repositories.TipoMaterialRepository;
-import ao.cinapse.recicla_me.services.TipoMaterialService;
+import ao.cinapse.recicla_me.services.interfaces.TipoMaterialService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

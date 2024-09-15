@@ -4,9 +4,8 @@ import ao.cinapse.recicla_me.models.Fornecedor;
 import ao.cinapse.recicla_me.models.Pessoa;
 import ao.cinapse.recicla_me.models.Usuario;
 import ao.cinapse.recicla_me.repositories.FornecedorRepository;
-import ao.cinapse.recicla_me.services.FornecedorService;
+import ao.cinapse.recicla_me.services.interfaces.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

@@ -6,7 +6,7 @@ package ao.cinapse.recicla_me.services.implementacao;
 
 import ao.cinapse.recicla_me.models.TipoUsuario;
 import ao.cinapse.recicla_me.repositories.TipoUsuarioRepository;
-import ao.cinapse.recicla_me.services.TipoUsuarioService;
+import ao.cinapse.recicla_me.services.interfaces.TipoUsuarioService;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Service;

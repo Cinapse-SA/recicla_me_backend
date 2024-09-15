@@ -11,8 +11,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-public class EstadoPublicacaoDTO extends AbstractDTO<EstadoPublicacao, EstadoPublicacaoDTO> {
-
+public class EstadoPublicacaoDTO extends AbstractDTO<EstadoPublicacao, EstadoPublicacaoDTO>
+{
     private UUID id;
     private String denominacao;
     private String codigo;
