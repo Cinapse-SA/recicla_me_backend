@@ -19,9 +19,9 @@ public interface UsuarioService extends UserDetailsService
 {
     //public Usuario salvarTransportador( Usuario usuario );
     
-    public Optional<Usuario> findByUsername( String username );
-    public Optional<Usuario> findByEmail( String username );
-    public Optional<Usuario> findByTelefone( String username );
+    Optional<Usuario> findByUsername( String username );
+    Optional<Usuario> findByEmail( String username );
+    Optional<Usuario> findByTelefone( String username );
 
     void construirPerfil(Usuario usuario) throws Exception;
 }

@@ -28,15 +28,17 @@ public class AgendamentoRecolhaDTO extends AbstractDTO<AgendamentoRecolha, Agend
     private LocalDateTime horarioRecolha;
     private TransportadorDTO transportador;
 
-
     @Override
     public AgendamentoRecolha cast(AgendamentoRecolhaDTO dto) {
         AgendamentoRecolha entity = new AgendamentoRecolha();
         BeanUtils.copyProperties(dto, entity);
 
-        entity.setIdPublicacao( PublicacaoDTO.builder().build().cast(dto.getPublicacao()));
-        entity.setIdEstadoAgendamentoRecolha( EstadoAgendamentoRecolhaDTO.builder().build().cast(dto.getEstadoAgendamentoRecolha()));
-        entity.setIdTransportador( TransportadorDTO.builder().build().cast(dto.getTransportador()) );
+        if (dto.getPublicacao() != null )
+            entity.setIdPublicacao( PublicacaoDTO.builder().build().cast(dto.getPublicacao()));
+        if (dto.getEstadoAgendamentoRecolha() != null )
+            entity.setIdEstadoAgendamentoRecolha( EstadoAgendamentoRecolhaDTO.builder().build().cast(dto.getEstadoAgendamentoRecolha()));
+        if ( dto.getTransportador() != null)
+            entity.setIdTransportador( TransportadorDTO.builder().build().cast(dto.getTransportador()) );
         entity.setIdAgendamentoRecolha( dto.getId());
         return entity;
     }
@@ -47,9 +49,12 @@ public class AgendamentoRecolhaDTO extends AbstractDTO<AgendamentoRecolha, Agend
         BeanUtils.copyProperties(entity, dto);
 
         dto.setId( entity.getIdAgendamentoRecolha() );
-        dto.setPublicacao( PublicacaoDTO.builder().build().parse(entity.getIdPublicacao()) );
-        dto.setTransportador( TransportadorDTO.builder().build().parse(entity.getIdTransportador()));
-        dto.setEstadoAgendamentoRecolha( EstadoAgendamentoRecolhaDTO.builder().build().parse(entity.getIdEstadoAgendamentoRecolha()));
+        if ( entity.getIdPublicacao() != null )
+            dto.setPublicacao( PublicacaoDTO.builder().build().parse(entity.getIdPublicacao()) );
+        if ( entity.getIdTransportador() != null )
+            dto.setTransportador( TransportadorDTO.builder().build().parse(entity.getIdTransportador()));
+        if ( entity.getIdEstadoAgendamentoRecolha() != null )
+            dto.setEstadoAgendamentoRecolha( EstadoAgendamentoRecolhaDTO.builder().build().parse(entity.getIdEstadoAgendamentoRecolha()));
 
         return dto;
     }
@@ -59,9 +64,12 @@ public class AgendamentoRecolhaDTO extends AbstractDTO<AgendamentoRecolha, Agend
         AgendamentoRecolha entity = new AgendamentoRecolha();
         BeanUtils.copyProperties(this, entity);
 
-        entity.setIdPublicacao( PublicacaoDTO.builder().build().cast(this.getPublicacao()));
-        entity.setIdEstadoAgendamentoRecolha( EstadoAgendamentoRecolhaDTO.builder().build().cast(this.getEstadoAgendamentoRecolha()));
-        entity.setIdTransportador( TransportadorDTO.builder().build().cast(this.getTransportador()) );
+        if ( this.getPublicacao() != null )
+            entity.setIdPublicacao( PublicacaoDTO.builder().build().cast(this.getPublicacao()));
+        if ( this.getEstadoAgendamentoRecolha() != null )
+            entity.setIdEstadoAgendamentoRecolha( EstadoAgendamentoRecolhaDTO.builder().build().cast(this.getEstadoAgendamentoRecolha()));
+        if ( this.getTransportador() != null )
+            entity.setIdTransportador( TransportadorDTO.builder().build().cast(this.getTransportador()) );
         entity.setIdAgendamentoRecolha( this.getId());
         return entity;
     }

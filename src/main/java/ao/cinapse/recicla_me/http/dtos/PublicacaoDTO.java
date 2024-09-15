@@ -57,10 +57,14 @@ public class PublicacaoDTO extends AbstractDTO<Publicacao, PublicacaoDTO>
         BeanUtils.copyProperties(entity, dto);
         dto.setId( entity.getIdPublicacao() );
 
-        dto.setFornecedor(FornecedorDTO.builder().build().parse( entity.getIdFornecedor() ));
-        dto.setEstado(EstadoPublicacaoDTO.builder().build().parse(entity.getIdEstadoPublicacao()));
-        dto.setItems( MaterialPublicadoDTO.builder().build().toListFromEntityList(entity.getMaterialPublicadoList()));
-        dto.setPontosRecolha(PontoRecolhaDTO.builder().build().toListFromEntityList(entity.getPontoRecolhaList()));
+        if ( entity.getIdFornecedor() != null )
+            dto.setFornecedor(FornecedorDTO.builder().build().parse( entity.getIdFornecedor() ));
+        if ( entity.getIdEstadoPublicacao() != null )
+            dto.setEstado(EstadoPublicacaoDTO.builder().build().parse(entity.getIdEstadoPublicacao()));
+        if ( entity.getMaterialPublicadoList() != null && !entity.getMaterialPublicadoList().isEmpty())
+            dto.setItems( MaterialPublicadoDTO.builder().build().toListFromEntityList(entity.getMaterialPublicadoList()));
+        if ( entity.getPontoRecolhaList() != null && !entity.getPontoRecolhaList().isEmpty())
+            dto.setPontosRecolha(PontoRecolhaDTO.builder().build().toListFromEntityList(entity.getPontoRecolhaList()));
 
         return dto;
     }

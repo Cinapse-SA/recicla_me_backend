@@ -19,7 +19,7 @@ import java.util.UUID;
 public class TransportadorDTO extends AbstractDTO<Transportador, TransportadorDTO>
 {
     private UUID id;
-    private String numeroFornecedor;
+    private String numeroTransportador;
     private PessoaDTO pessoa;
     private TipoTransportadorDTO tipoTransportador;
 
@@ -27,8 +27,10 @@ public class TransportadorDTO extends AbstractDTO<Transportador, TransportadorDT
     public Transportador cast(TransportadorDTO dto) {
         Transportador entity = new Transportador();
         BeanUtils.copyProperties(dto, entity);
-        entity.setIdPessoa( PessoaDTO.builder().build().cast(dto.getPessoa()));
-        entity.setIdTipoTransportador( TipoTransportadorDTO.builder().build().cast(dto.getTipoTransportador()));
+        if ( dto.getPessoa() != null )
+            entity.setIdPessoa( PessoaDTO.builder().build().cast(dto.getPessoa()));
+        if ( dto.getTipoTransportador() != null )
+            entity.setIdTipoTransportador( TipoTransportadorDTO.builder().build().cast(dto.getTipoTransportador()));
         entity.setIdTransportador(dto.getId());
         return entity;
     }
@@ -37,8 +39,10 @@ public class TransportadorDTO extends AbstractDTO<Transportador, TransportadorDT
     public TransportadorDTO parse(Transportador entity) {
         TransportadorDTO dto = new TransportadorDTO();
         BeanUtils.copyProperties(entity, dto);
-        dto.setPessoa( PessoaDTO.builder().build().parse(entity.getIdPessoa()));
-        dto.setTipoTransportador( TipoTransportadorDTO.builder().build().parse(entity.getIdTipoTransportador()));
+        if ( entity.getIdPessoa() != null )
+            dto.setPessoa( PessoaDTO.builder().build().parse(entity.getIdPessoa()));
+        if ( entity.getIdTipoTransportador() != null )
+            dto.setTipoTransportador( TipoTransportadorDTO.builder().build().parse(entity.getIdTipoTransportador()));
         dto.setId(entity.getIdTransportador());
         return dto;
     }
@@ -47,8 +51,10 @@ public class TransportadorDTO extends AbstractDTO<Transportador, TransportadorDT
     public Transportador cast() {
         Transportador entity = new Transportador();
         BeanUtils.copyProperties(this, entity);
-        entity.setIdPessoa( PessoaDTO.builder().build().cast(this.getPessoa()));
-        entity.setIdTipoTransportador( TipoTransportadorDTO.builder().build().cast(this.getTipoTransportador()));
+        if ( this.getPessoa() != null )
+            entity.setIdPessoa( PessoaDTO.builder().build().cast(this.getPessoa()));
+        if ( this.getTipoTransportador() != null )
+            entity.setIdTipoTransportador( TipoTransportadorDTO.builder().build().cast(this.getTipoTransportador()));
         entity.setIdTransportador(this.getId());
         return entity;
     }

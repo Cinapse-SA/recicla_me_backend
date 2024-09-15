@@ -17,13 +17,11 @@ public class Comprador {
     @Id
     @GeneratedValue
     private UUID idComprador;
-
     private String numeroComprador;
 
     @ManyToOne
     @JoinColumn(referencedColumnName = "idPessoa", name = "id_pessoa", nullable = false)
     private Pessoa idPessoa;
-
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

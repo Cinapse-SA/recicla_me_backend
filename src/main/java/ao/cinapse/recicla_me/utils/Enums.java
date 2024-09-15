@@ -33,4 +33,8 @@ public class Enums
     public enum EstadoPublicacao {
         Novo, Pendente, Por_Verificar, Recusada, Eliminada, Arquivada
     }
+
+    public enum EstadoAgendamentoRecolha {
+        Agendado, Expirado, Executado, Cancelado
+    }
 }

@@ -33,7 +33,8 @@ public class TabelasReferenciasInit
     private UnidadeMedidaServiceImpl unidadeMedidaService;
     @Autowired
     private EstadoPublicacaoServiceImpl estadoPublicacaoService;
-
+    @Autowired
+    private EstadoAgendamentoRecolhaServiceImpl estadoAgendamentoRecolhaService;
 
     @PostConstruct
     protected void init() 
@@ -44,6 +45,7 @@ public class TabelasReferenciasInit
         this.initTipoUsuario();
         this.initUnidadeMedida();
         this.initEstadoPublicacao();
+        this.initiEstadoAgendamentoRecolha();
     }
 
     private void initUnidadeMedida() {
@@ -145,6 +147,25 @@ public class TabelasReferenciasInit
         }
     }
 
+
+    private void initiEstadoAgendamentoRecolha()
+    {
+        for (Enums.EstadoAgendamentoRecolha estado : Enums.EstadoAgendamentoRecolha.values()) {
+            String codigo = this.gerarCodigo( estado.toString() );
+            if ( (this.estadoAgendamentoRecolhaService.getByCodigo(codigo) == null) )
+            {
+                EstadoAgendamentoRecolha estadoAgendamentoRecolha = this.initEstadoAgendamentoRecolha( estado );
+                try {
+                    this.estadoAgendamentoRecolhaService.criar(estadoAgendamentoRecolha);
+                }
+                catch (Exception ex) {
+                    Logger.getLogger(TabelasReferenciasInit.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+
     public static String gerarCodigo(String tipo ) {
         return tipo.replaceAll(" ", "_");
     }
@@ -196,6 +217,15 @@ public class TabelasReferenciasInit
                 .builder()
                 .codigo( estado.toString())
                 .denominacao(estado.toString())
+                .build();
+    }
+
+    private EstadoAgendamentoRecolha initEstadoAgendamentoRecolha( Enums.EstadoAgendamentoRecolha estado) {
+        return EstadoAgendamentoRecolha
+                .builder()
+                .codigo( estado.toString())
+                .denominacao(estado.toString())
+                .descricao(estado.toString())
                 .build();
     }
 }

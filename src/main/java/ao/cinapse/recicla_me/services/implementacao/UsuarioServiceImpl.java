@@ -37,6 +37,8 @@ public class UsuarioServiceImpl extends AbstractService<Usuario, UUID> implement
     private TransportadorServiceImpl transportadorService;
     @Autowired
     private FornecedorServiceImpl fornecedorService;
+    @Autowired
+    private CompradorServiceImpl compradorService;
 
 
     @Override
@@ -79,16 +81,14 @@ public class UsuarioServiceImpl extends AbstractService<Usuario, UUID> implement
     }
 
     @Override
-    public void construirPerfil(Usuario usuario) throws Exception {
-        if ( usuario.getIdTipoUsuario().getCodigo().equalsIgnoreCase(Enums.TipoUsuario.FORNECEDOR.toString()) ) {
+    public void construirPerfil(Usuario usuario) throws Exception
+    {
+        if ( usuario.getIdTipoUsuario().getCodigo().equalsIgnoreCase(Enums.TipoUsuario.FORNECEDOR.toString()) )
             this.fornecedorService.criarPorUsuario(usuario);
-        }
-        else if ( usuario.getIdTipoUsuario().getCodigo().equalsIgnoreCase( Enums.TipoUsuario.TRANSPORTADOR.toString()) ) {
+        else if ( usuario.getIdTipoUsuario().getCodigo().equalsIgnoreCase( Enums.TipoUsuario.TRANSPORTADOR.toString()) )
             this.transportadorService.criarPorUsuario(usuario);
-        }
-        else {
-
-        }
+        else if ( usuario.getIdTipoUsuario().getCodigo().equalsIgnoreCase( Enums.TipoUsuario.COMPRADOR.toString() ) )
+            this.compradorService.criarPorUsuario(usuario);
     }
 
     @Override

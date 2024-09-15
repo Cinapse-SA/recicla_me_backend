@@ -16,4 +16,5 @@ import java.util.UUID;
 @RequestMapping("agendamento_recolha")
 @RestController
 public class AgendamentoRecolhaController  extends BaseController<ResponseBody, AgendamentoRecolhaDTO, AgendamentoRecolha, UUID, AgendamentoRecolhaServiceImpl> {
+
 }
