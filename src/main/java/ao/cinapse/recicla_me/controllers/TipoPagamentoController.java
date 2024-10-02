@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/tipo-pagamentotipo-pagamento")
+@RequestMapping("/tipo-pagamento")
 public class TipoPagamentoController extends BaseController<ResponseBody,  TipoPagamentoDTO, TipoPagamento, UUID, TipoPagamentoServiceImpl>
 {
     @Autowired
