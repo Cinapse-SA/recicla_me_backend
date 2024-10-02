@@ -9,11 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -42,6 +38,16 @@ public abstract class BaseController<
         }
         catch (Exception e) {
             return serverError("Não foi possível listar os registros.", e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Response> findById(@PathVariable("id") ID id) {
+        try {
+            return ok("Entidade de obtida com sucesso.", ((AbstractService<E, ID>)this.service).findById(id));
+        }
+        catch (Exception ex) {
+            return serverError("Não foi possível encontrar o registro.", ex.getMessage());
         }
     }
     

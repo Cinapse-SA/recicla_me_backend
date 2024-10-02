@@ -15,7 +15,8 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Recolha {
+public class Recolha
+{
     @Id
     @GeneratedValue
     private UUID idRecolha;
@@ -33,6 +34,11 @@ public class Recolha {
     private Publicacao idPublicacao;
 
     @ManyToOne
+    @JoinColumn(referencedColumnName = "idAgendamentoRecolha", name = "id_agendamento_recolha", nullable = false)
+    @JsonIgnore
+    private AgendamentoRecolha idAgendamentoRecolha;
+
+    @ManyToOne
     @JoinColumn(referencedColumnName = "idFornecedor", name = "id_fornecedor", nullable = false)
     private Fornecedor idFornecedor;
 
@@ -41,12 +47,12 @@ public class Recolha {
     private Transportador idTransportador;
 
 
-
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     @Column(nullable = true)
     private LocalDateTime deletedAt;
+
 
     @PrePersist
     public void init() {

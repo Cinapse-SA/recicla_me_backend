@@ -33,37 +33,37 @@ public abstract class AbstractService<E extends Object, K extends Object>
     protected Repository<E, K> getRepository() {
         return repository;
     }
-    
+
     public List<E> findAll() {
         return this.repository.findAll();
-    } 
-    
+    }
+
     public Page<E> findAll( Pageable pageable ) {
         return this.repository.findAll(pageable);
     }
-    
+
     public Page<E> findAllPaginado( Pageable pageable ) {
         return this.repository.findAll( pageable );
     }
-    
+
     public Optional<E> findById( K id ) {
         return this.repository.findById(id);
     }
-    
+
     @Transactional
     public E criar( E entidade ) throws Exception {
         if ( entidade == null )
             throw new NullPointerException("Entidade a ser registrada está nula.");
         return this.repository.save(entidade);
     }
-    
+
     public E editar( K id, E entidade ) {
         if ( this.findById(id).isEmpty() )
             throw new EntityNotFoundException("Não foi possível encontrar a entidade procurada.");
         return this.repository.save(entidade);
     }
-    
-    public E eliminar( K id ) 
+
+    public E eliminar( K id )
     {
         Optional<E> entidade = this.findById(id);
         if ( entidade.isEmpty() )

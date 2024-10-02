@@ -18,11 +18,10 @@ import java.util.UUID;
 
 @RequestMapping("agendamento_recolha")
 @RestController
-public class AgendamentoRecolhaController  extends BaseController<ResponseBody, AgendamentoRecolhaDTO, AgendamentoRecolha, UUID, AgendamentoRecolhaServiceImpl> {
-
+public class AgendamentoRecolhaController  extends BaseController<ResponseBody, AgendamentoRecolhaDTO, AgendamentoRecolha, UUID, AgendamentoRecolhaServiceImpl>
+{
     @Override
     public ResponseEntity<ResponseBody> listar(Pageable page) {
-        return this.ok("Lista de Publicações", AgendamentoRecolhaDTO.builder().build().toListFromEntityList(this.getService().findAll()));
+        return this.ok("Lista de Agendamentos", AgendamentoRecolhaDTO.builder().build().toListFromEntityList(this.getService().findAll()));
     }
-
 }

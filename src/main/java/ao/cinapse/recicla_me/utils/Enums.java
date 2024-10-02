@@ -37,4 +37,8 @@ public class Enums
     public enum EstadoAgendamentoRecolha {
         Agendado, Expirado, Executado, Cancelado
     }
+
+    public enum TipoPagamento {
+        Pagamento_Por_Referencia, Multicaixa, Transferencia_Bancaria, Pontos, Isento
+    }
 }

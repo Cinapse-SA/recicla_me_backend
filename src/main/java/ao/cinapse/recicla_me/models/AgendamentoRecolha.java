@@ -14,7 +14,8 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AgendamentoRecolha {
+public class AgendamentoRecolha
+{
     @Id
     @GeneratedValue
     private UUID idAgendamentoRecolha;
@@ -34,9 +35,9 @@ public class AgendamentoRecolha {
     @JoinColumn(referencedColumnName = "idTransportador", name = "id_transportador", nullable = false)
     private Transportador idTransportador;
 
-
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
 
     @Column(nullable = true)
     private LocalDateTime deletedAt;

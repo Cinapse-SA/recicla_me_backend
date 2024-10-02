@@ -35,6 +35,9 @@ public class TabelasReferenciasInit
     private EstadoPublicacaoServiceImpl estadoPublicacaoService;
     @Autowired
     private EstadoAgendamentoRecolhaServiceImpl estadoAgendamentoRecolhaService;
+    @Autowired
+    private TipoPagamentoServiceImpl tipoPagamentoService;
+
 
     @PostConstruct
     protected void init() 
@@ -46,7 +49,27 @@ public class TabelasReferenciasInit
         this.initUnidadeMedida();
         this.initEstadoPublicacao();
         this.initiEstadoAgendamentoRecolha();
+        this.initTipoPagamentos();
     }
+
+
+    private void initTipoPagamentos()
+    {
+        for ( Enums.TipoPagamento tipoPagamento : Enums.TipoPagamento.values() )
+        {
+            String codigo = this.gerarCodigo( tipoPagamento.toString() );
+            if ( !this.tipoPagamentoService.codigoExistente(codigo) ) {
+                TipoPagamento tipo = this.initTipoPagamento( tipoPagamento );
+                try {
+                    this.tipoPagamentoService.criar(tipo);
+                }
+                catch (Exception ex) {
+                    Logger.getLogger(TabelasReferenciasInit.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
 
     private void initUnidadeMedida() {
         for ( Enums.UnidadeMedida unidadeMedida : Enums.UnidadeMedida.values() )
@@ -176,6 +199,7 @@ public class TabelasReferenciasInit
         return TipoFornecedor.builder()
             .codigo( gerarCodigo(tipo.toString() ) )
             .denominacao( tipo.toString() )
+            .descricao(tipo.toString())
             .build();
     }
 
@@ -184,6 +208,7 @@ public class TabelasReferenciasInit
         return TipoTransportador.builder()
                 .codigo( gerarCodigo(tipo.toString() ) )
                 .denominacao( tipo.toString() )
+                .descricao(tipo.toString())
                 .build();
     }
 
@@ -202,6 +227,15 @@ public class TabelasReferenciasInit
         return TipoUsuario.builder()
                 .codigo( gerarCodigo(tipo.toString() ) )
                 .denominacao( tipo.toString() )
+                .build();
+    }
+
+    private TipoPagamento initTipoPagamento(Enums.TipoPagamento tipoPagamento )
+    {
+        return TipoPagamento.builder()
+                .descricao( tipoPagamento.toString().replaceAll("_", " ") )
+                .codigo(gerarCodigo(tipoPagamento.toString()))
+                .denominacao( tipoPagamento.toString().replaceAll("_", " ") )
                 .build();
     }
 
