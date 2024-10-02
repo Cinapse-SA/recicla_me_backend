@@ -6,12 +6,14 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Getter
 @Setter
 @ToString
+@Component
 public class TipoPagamentoDTO  extends AbstractDTO<TipoPagamento, TipoPagamentoDTO>
 {
     private UUID id;
