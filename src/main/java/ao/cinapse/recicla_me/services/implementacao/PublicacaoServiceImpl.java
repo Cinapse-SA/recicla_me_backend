@@ -3,13 +3,17 @@ package ao.cinapse.recicla_me.services.implementacao;
 import ao.cinapse.recicla_me.http.dtos.PublicacaoDTO;
 import ao.cinapse.recicla_me.models.Fornecedor;
 import ao.cinapse.recicla_me.models.Publicacao;
+import ao.cinapse.recicla_me.repositories.FornecedorRepository;
+import ao.cinapse.recicla_me.repositories.PublicacaoRepository;
 import ao.cinapse.recicla_me.security.UsuarioLogadoService;
 import ao.cinapse.recicla_me.services.interfaces.PublicacaoService;
 import ao.cinapse.recicla_me.utils.Enums;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -25,6 +29,26 @@ public class PublicacaoServiceImpl extends AbstractService<Publicacao, UUID> imp
     private PontoRecolhaServiceImpl pontoRecolhaService;
     @Autowired
     private EstadoPublicacaoServiceImpl estadoPublicacaoService;
+
+    @Override
+    protected PublicacaoRepository getRepository() {
+        return (PublicacaoRepository) super.getRepository();
+    }
+
+    @Override
+    public List<Publicacao> findAll()
+    {
+        try {
+            Fornecedor fornecedor = this.usuarioLogadoService.getFornecedor();
+            System.err.println(fornecedor);
+            if ( fornecedor != null ) {
+                return this.getRepository().findByIdFornecedor( fornecedor );
+            }
+        }
+        catch (Exception ex) {}
+
+        return super.findAll();
+    }
 
     @Override
     @Transactional
