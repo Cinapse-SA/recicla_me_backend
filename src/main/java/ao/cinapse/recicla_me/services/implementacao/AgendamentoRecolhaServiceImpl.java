@@ -1,19 +1,23 @@
 package ao.cinapse.recicla_me.services.implementacao;
 
 import ao.cinapse.recicla_me.models.AgendamentoRecolha;
+import ao.cinapse.recicla_me.models.Publicacao;
 import ao.cinapse.recicla_me.models.Transportador;
 import ao.cinapse.recicla_me.models.Usuario;
+import ao.cinapse.recicla_me.repositories.AgendamentoRecolhaRepository;
 import ao.cinapse.recicla_me.security.UsuarioLogadoService;
+import ao.cinapse.recicla_me.services.interfaces.AgendamentoRecolhaService;
 import ao.cinapse.recicla_me.utils.Enums;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class AgendamentoRecolhaServiceImpl extends AbstractService<AgendamentoRecolha, UUID>
+public class AgendamentoRecolhaServiceImpl extends AbstractService<AgendamentoRecolha, UUID> implements AgendamentoRecolhaService
 {
     @Autowired
     private TransportadorServiceImpl transportadorService;
@@ -23,6 +27,11 @@ public class AgendamentoRecolhaServiceImpl extends AbstractService<AgendamentoRe
     private EstadoAgendamentoRecolhaServiceImpl estadoAgendamentoRecolhaService;
     @Autowired
     private PublicacaoServiceImpl publicacaoService;
+
+    @Override
+    protected AgendamentoRecolhaRepository getRepository() {
+        return (AgendamentoRecolhaRepository) super.getRepository();
+    }
 
     @Override
     @Transactional
@@ -38,5 +47,11 @@ public class AgendamentoRecolhaServiceImpl extends AbstractService<AgendamentoRe
         AgendamentoRecolha recolha = super.criar(entidade);
         recolha.setIdPublicacao( this.publicacaoService.findById( entidade.getIdPublicacao().getIdPublicacao()).get());
         return recolha;
+    }
+
+    @Override
+    public List<AgendamentoRecolha> findByPublicacaoId(Publicacao publicacaoId)
+    {
+        return this.getRepository().findByIdPublicacao( publicacaoId );
     }
 }

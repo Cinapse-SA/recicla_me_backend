@@ -4,6 +4,7 @@
  */
 package ao.cinapse.recicla_me.services.implementacao;
 
+import ao.cinapse.recicla_me.models.AgendamentoRecolha;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
@@ -71,4 +72,5 @@ public abstract class AbstractService<E extends Object, K extends Object>
         this.repository.deleteById(id);
         return entidade.get();
     }
+
 }
