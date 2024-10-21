@@ -27,4 +27,16 @@ public class EstadoAgendamentoRecolhaServiceImpl
         Optional<EstadoAgendamentoRecolha> estadoPublicacao = this.getRepository().findByCodigo(codigo);
         return estadoPublicacao.orElse(null);
     }
+
+    @Override
+    public EstadoAgendamentoRecolha getEstadoConfirmado() {
+        Optional<EstadoAgendamentoRecolha> estadoPublicacao = this.getRepository().findByCodigo(Enums.EstadoAgendamentoRecolha.Confirmado.toString());
+        return estadoPublicacao.orElse(null);
+    }
+
+    @Override
+    public EstadoAgendamentoRecolha getEstadoCancelado() {
+        Optional<EstadoAgendamentoRecolha> estadoPublicacao = this.getRepository().findByCodigo(Enums.EstadoAgendamentoRecolha.Cancelado.toString());
+        return estadoPublicacao.orElse(null);
+    }
 }

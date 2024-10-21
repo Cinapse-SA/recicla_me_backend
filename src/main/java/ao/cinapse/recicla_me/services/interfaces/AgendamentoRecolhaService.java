@@ -10,4 +10,6 @@ import java.util.UUID;
 public interface AgendamentoRecolhaService {
 
     public List<AgendamentoRecolha> findByPublicacaoId(Publicacao publicacaoId );
+
+    AgendamentoRecolha confirmarAgendamentoRecolha(AgendamentoRecolha agendamentoRecolha);
 }

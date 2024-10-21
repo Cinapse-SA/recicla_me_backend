@@ -12,10 +12,7 @@ import ao.cinapse.recicla_me.services.implementacao.AgendamentoRecolhaServiceImp
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,5 +32,16 @@ public class AgendamentoRecolhaController  extends BaseController<ResponseBody, 
     {
         List<AgendamentoRecolha> list = this.getService().findByPublicacaoId(Publicacao.builder().idPublicacao(UUID.fromString(publicacaoId)).build());
         return this.ok("Agendamentos em Publicação de Recolha", AgendamentoRecolhaDTO.builder().build().toListFromEntityList(list));
+    }
+
+    @PutMapping("/confirmar/{id}")
+    public ResponseEntity<ResponseBody> confirmar( @PathVariable("id") String idAgendamentoRecolha ) {
+        try {
+            AgendamentoRecolha agendamentoRecolha = this.getService().confirmarAgendamentoRecolha( AgendamentoRecolha.builder().idAgendamentoRecolha( UUID.fromString(idAgendamentoRecolha) ).build() );
+            return this.ok("Agendamento Confirmado com sucesso.", AgendamentoRecolhaDTO.builder().build().parse(agendamentoRecolha) );
+        }
+        catch (Exception ex) {
+            return this.badRequest("Não foi possível confirmar o agendamento da recolha", ex.getMessage());
+        }
     }
 }

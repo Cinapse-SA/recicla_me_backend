@@ -67,7 +67,8 @@ public abstract class BaseController<
     }
     
     @PutMapping
-    public ResponseEntity<Response> editar(ID id, @RequestBody DTO dto) {
+    public ResponseEntity<Response> editar(ID id, @RequestBody DTO dto)
+    {
         try {
             E parsevalue = ((AbstractDTO<E, DTO>)dto).cast(dto);
             E entidade = ((AbstractService<E, ID>)this.service).editar(id, parsevalue);

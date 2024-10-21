@@ -1,13 +1,11 @@
 package ao.cinapse.recicla_me.services.implementacao;
 
-import ao.cinapse.recicla_me.models.AgendamentoRecolha;
-import ao.cinapse.recicla_me.models.Publicacao;
-import ao.cinapse.recicla_me.models.Transportador;
-import ao.cinapse.recicla_me.models.Usuario;
+import ao.cinapse.recicla_me.models.*;
 import ao.cinapse.recicla_me.repositories.AgendamentoRecolhaRepository;
 import ao.cinapse.recicla_me.security.UsuarioLogadoService;
 import ao.cinapse.recicla_me.services.interfaces.AgendamentoRecolhaService;
 import ao.cinapse.recicla_me.utils.Enums;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,4 +52,24 @@ public class AgendamentoRecolhaServiceImpl extends AbstractService<AgendamentoRe
     {
         return this.getRepository().findByIdPublicacao( publicacaoId );
     }
+
+    @Override
+    @Transactional
+    public AgendamentoRecolha confirmarAgendamentoRecolha(AgendamentoRecolha agendamentoRecolha) {
+        Optional<AgendamentoRecolha> entity = this.findById(agendamentoRecolha.getIdAgendamentoRecolha());
+        if ( entity.isEmpty() )
+            throw new EntityNotFoundException("Não foi possível encontrar o agendamento da recolha");
+        Publicacao publicacao = entity.get().getIdPublicacao();
+
+        this.getRepository().confirmarAgendamentoRecolha(
+            publicacao,
+            estadoAgendamentoRecolhaService.getEstadoCancelado(),
+            entity.get()
+        );
+
+        EstadoAgendamentoRecolha estadoAgendamentoRecolha = this.estadoAgendamentoRecolhaService.getEstadoConfirmado();
+        entity.get().setIdEstadoAgendamentoRecolha( estadoAgendamentoRecolha );
+        return this.getRepository().save( entity.get() );
+    }
+
 }

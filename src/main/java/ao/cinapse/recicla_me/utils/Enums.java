@@ -35,7 +35,7 @@ public class Enums
     }
 
     public enum EstadoAgendamentoRecolha {
-        Agendado, Expirado, Executado, Cancelado
+        Agendado, Expirado, Executado, Cancelado, Confirmado
     }
 
     public enum TipoPagamento {
