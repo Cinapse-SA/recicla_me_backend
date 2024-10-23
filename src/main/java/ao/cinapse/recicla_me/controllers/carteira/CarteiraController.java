@@ -26,7 +26,7 @@ public class CarteiraController extends BaseController<ResponseBody, CarteiraDTO
             return ok("Carteira criada com sucesso.", CarteiraDTO.builder().build().parse(carteira) );
         }
         catch (Exception e) {
-            return badRequest("Não foi possível criar a carteira, "+e.getMessage(), new ArrayList<>() );
+            return badRequest(e.getMessage(), new ArrayList<>() );
         }
     }
 
