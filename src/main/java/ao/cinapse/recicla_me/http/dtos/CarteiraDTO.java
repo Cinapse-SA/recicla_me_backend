@@ -3,6 +3,7 @@ package ao.cinapse.recicla_me.http.dtos;
 import ao.cinapse.recicla_me.models.Carteira;
 import ao.cinapse.recicla_me.models.Pessoa;
 import lombok.*;
+import org.springframework.beans.BeanUtils;
 
 import java.util.UUID;
 
@@ -23,21 +24,33 @@ public class CarteiraDTO extends AbstractDTO<Carteira, CarteiraDTO>
     private Double saldoContabilistico;
     private String moeda;
     private String simboloMoeda;
-    private Pessoa pessoa;
+    private PessoaDTO pessoa;
 
 
     @Override
     public Carteira cast(CarteiraDTO dto) {
-        return null;
+        Carteira entity = new Carteira();
+        entity.setIdCarteira( dto.getId() );
+        BeanUtils.copyProperties(dto, entity);
+        entity.setIdPessoa( PessoaDTO.builder().build().cast(dto.getPessoa()));
+        return entity;
     }
 
     @Override
     public CarteiraDTO parse(Carteira entity) {
-        return null;
+        CarteiraDTO dto = new CarteiraDTO();
+        dto.setId( entity.getIdCarteira() );
+        BeanUtils.copyProperties(entity, dto);
+        dto.setPessoa( PessoaDTO.builder().build().parse(entity.getIdPessoa()));
+        return dto;
     }
 
     @Override
     public Carteira cast() {
-        return null;
+        Carteira entity = new Carteira();
+        entity.setIdCarteira( this.getId() );
+        BeanUtils.copyProperties( this, entity);
+        entity.setIdPessoa( PessoaDTO.builder().build().cast(this.getPessoa()));
+        return entity;
     }
 }
