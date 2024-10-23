@@ -38,7 +38,7 @@ public class CarteiraController extends BaseController<ResponseBody, CarteiraDTO
             return ok("Carteira encontrada com sucesso.", CarteiraDTO.builder().build().parse(carteira) );
         }
         catch (Exception e) {
-            return badRequest("Não foi possível encontrar a carteira, "+e.getMessage(), new ArrayList<>() );
+            return badRequest(e.getMessage(), new ArrayList<>() );
         }
     }
 }
