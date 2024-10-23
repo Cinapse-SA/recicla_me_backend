@@ -1,45 +1,46 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ao.cinapse.recicla_me.models;
 
+
 import jakarta.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-/**
- *
- * @author ivandro.sousa
- */
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 @Getter
 @Setter
 @ToString
-@Entity(name = "contacto")
-public class Contacto implements Serializable
+@Entity(name = "carteira")
+public class Carteira implements Serializable
 {
     @Id
     @GeneratedValue
-    private UUID idContacto;
+    private UUID idCarteira;
 
-    private String contacto;
-    private String tipo;
-    private boolean ePrimario;
-    
-    @ManyToOne
+    private String numeroCarteira;
+    private String displayNumeroCarteira;
+
+    private String numeroConta;
+    private String iban;
+
+    private Double saldoDisponivel;
+    private Double saldoContabilistico;
+
+    private String moeda;
+    private String simboloMoeda;
+
+    @OneToOne
     @JoinColumn(referencedColumnName = "idPessoa", nullable = false)
     private Pessoa idPessoa;
 
-
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
     @Column(nullable = true)
     private LocalDateTime deletedAt;
-
 
     @PrePersist
     public void init() {
