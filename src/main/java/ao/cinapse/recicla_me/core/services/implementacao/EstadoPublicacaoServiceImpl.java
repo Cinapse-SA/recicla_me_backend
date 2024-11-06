@@ -27,4 +27,9 @@ public class EstadoPublicacaoServiceImpl extends AbstractService<EstadoPublicaca
     public EstadoPublicacao getEstadoProntaRecolhar() {
         return this.getByCodigo(Enums.EstadoPublicacao.Pronta_Recolher.toString() );
     }
+
+    @Override
+    public EstadoPublicacao getEstadoPendente() {
+        return this.getByCodigo(Enums.EstadoPublicacao.Pendente.toString() );
+    }
 }

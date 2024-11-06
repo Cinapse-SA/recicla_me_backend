@@ -8,13 +8,14 @@ import ao.cinapse.recicla_me.core.kafka.producers.PagamentoServiceProducer;
 import ao.cinapse.recicla_me.core.models.Publicacao;
 import ao.cinapse.recicla_me.core.services.implementacao.PublicacaoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -22,7 +23,52 @@ import java.util.UUID;
 public class PublicacaoController extends BaseController<ResponseBody, PublicacaoDTO, Publicacao, UUID, PublicacaoServiceImpl>
 {
     @Override
-    public ResponseEntity<ResponseBody> listar(Pageable page) {
-        return this.ok("Lista de Publicações", PublicacaoDTO.builder().build().toListFromEntityList(this.getService().findAll()));
+    public ResponseEntity<ResponseBody> listar(@PageableDefault(size = 10, page = 0) Pageable page) {
+        try
+        {
+            Page<Publicacao> paged = this.getService().findAllPaginado(page);
+            List<Publicacao> list = paged.getContent();
+            return ok(
+                    "Lista de Publicações",
+                    PublicacaoDTO.builder().build().toListFromEntityList(list)
+            );
+        }
+        catch (Exception e) {
+            return badRequest(e.getMessage(), new ArrayList<>());
+        }
+    }
+
+    @GetMapping("/pendente")
+    public ResponseEntity<PublicacaoDTO> findAllPendentes(@PageableDefault(size = 10, page = 0) Pageable page)
+    {
+        try
+        {
+            Page<Publicacao> paged = this.getService().findAllPendentes(page);
+            List<Publicacao> list = paged.getContent();
+            return ok(
+                "Lista de Publicações Pendentes",
+                PublicacaoDTO.builder().build().toListFromEntityList(list)
+            );
+        }
+        catch (Exception e) {
+            return badRequest(e.getMessage(), new ArrayList<>());
+        }
+    }
+
+    @GetMapping("/pronta-recolher")
+    public ResponseEntity<PublicacaoDTO> prontaRecolher(@PageableDefault(size = 10, page = 0) Pageable page)
+    {
+        try
+        {
+            Page<Publicacao> paged = this.getService().findAllProntaRecolher(page);
+            List<Publicacao> list = paged.getContent();
+            return ok(
+            "Lista de Publicações",
+                PublicacaoDTO.builder().build().toListFromEntityList(list)
+            );
+        }
+        catch (Exception e) {
+            return badRequest(e.getMessage(), new ArrayList<>());
+        }
     }
 }

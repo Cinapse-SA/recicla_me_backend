@@ -8,6 +8,8 @@ import ao.cinapse.recicla_me.core.security.UsuarioLogadoService;
 import ao.cinapse.recicla_me.core.services.interfaces.PublicacaoService;
 import ao.cinapse.recicla_me.core.utils.Enums;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,6 +50,8 @@ public class PublicacaoServiceImpl extends AbstractService<Publicacao, UUID> imp
         return super.findAll();
     }
 
+
+
     @Override
     @Transactional
     public Publicacao criar(Publicacao entidade) throws Exception
@@ -87,4 +91,28 @@ public class PublicacaoServiceImpl extends AbstractService<Publicacao, UUID> imp
     public Publicacao salvarUsandoDTO(PublicacaoDTO dto) {
         return null;
     }
+
+    @Override
+    public Page<Publicacao> findAllProntaRecolher(Pageable page) throws Exception
+    {
+        Fornecedor fornecedor = this.usuarioLogadoService.getFornecedor();
+        return this.getRepository().findByIdEstadoPublicacaoAndIdFornecedor(
+            this.estadoPublicacaoService.getEstadoProntaRecolhar().getIdEstadoPublicacao(),
+            fornecedor.getIdFornecedor(),
+            page
+        );
+    }
+
+
+    public Page<Publicacao> findAllPendentes(Pageable page) throws Exception
+    {
+        Fornecedor fornecedor = this.usuarioLogadoService.getFornecedor();
+        return this.getRepository().findByIdEstadoPublicacaoAndIdFornecedor(
+            this.estadoPublicacaoService.getEstadoPendente().getIdEstadoPublicacao(),
+            fornecedor.getIdFornecedor(),
+            page
+        );
+    }
+
+
 }
