@@ -3,6 +3,10 @@ security:
     expiration-time: 864000000
     secret-key: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
 spring:
+  kafka:
+    bootstrap-servers: 157.173.205.98:9092
+    consumer:
+      group-id: "recicla-me-carteira"
   datasource:
     username: imagikfx_reciclame
     url: jdbc:mysql://160.119.240.230:3306/imagikfx_reciclame?createDatabaseIfNotExist=true

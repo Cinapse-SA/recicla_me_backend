@@ -3,6 +3,7 @@ server:
     encoding:
       charset: UTF-8
     context-path: /api-recicla
+
 logging:
   level:
     org:
@@ -11,6 +12,11 @@ logging:
           servlet:
             handler:
               HandlerMappingIntrospector: ERROR
+
+topicos:
+  executar-pagamento: "executar-pagamento"
+  transacao-confirmada: "transacao-confirmada"
+
 spring:
   servlet:
     multipart:
