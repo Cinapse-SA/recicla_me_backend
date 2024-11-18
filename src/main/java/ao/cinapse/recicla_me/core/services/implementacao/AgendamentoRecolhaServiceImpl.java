@@ -7,9 +7,11 @@ import ao.cinapse.recicla_me.core.services.interfaces.AgendamentoRecolhaService;
 import ao.cinapse.recicla_me.core.utils.Enums;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -70,6 +72,12 @@ public class AgendamentoRecolhaServiceImpl extends AbstractService<AgendamentoRe
         EstadoAgendamentoRecolha estadoAgendamentoRecolha = this.estadoAgendamentoRecolhaService.getEstadoConfirmado();
         entity.get().setIdEstadoAgendamentoRecolha( estadoAgendamentoRecolha );
         return this.getRepository().save( entity.get() );
+    }
+
+    @Override
+    public List<AgendamentoRecolha> findAgendamentosActivos(String publicacaoId, Pageable page) {
+        LocalDateTime agora = LocalDateTime.now().plusHours(1);
+        return this.getRepository().findAgendamentosActivos( agora );
     }
 
 }

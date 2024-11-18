@@ -8,9 +8,9 @@ spring:
     consumer:
       group-id: "recicla-me-carteira"
   datasource:
-    username: imagikfx_reciclame
-    url: jdbc:mysql://160.119.240.230:3306/imagikfx_reciclame?createDatabaseIfNotExist=true
-    password: reciclame
+    username: cinapse_recicla_me
+    url: jdbc:mysql://cinapse.ao:3306/cinapse_recicla_me?createDatabaseIfNotExist=true
+    password: cinapse_recicla_me
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     generate-ddl: true

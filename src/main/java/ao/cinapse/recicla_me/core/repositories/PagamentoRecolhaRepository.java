@@ -1,6 +1,7 @@
 package ao.cinapse.recicla_me.core.repositories;
 
 import ao.cinapse.recicla_me.core.models.PagamentoRecolha;
+import ao.cinapse.recicla_me.core.models.Publicacao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,4 +15,7 @@ public interface PagamentoRecolhaRepository extends JpaRepository<PagamentoRecol
 {
     @Query("select pr from pagamento_recolha pr where pr.idTransacao = :idTransacao")
     Optional<PagamentoRecolha> findByIdTransacao( @Param("idTransacao") String uuid);
+
+    @Query("select pr from pagamento_recolha  pr where pr.idPublicacao = :idPublicacao")
+    Optional<PagamentoRecolha> findByIdPublicacao(@Param("idPublicacao") Publicacao publicacao);
 }

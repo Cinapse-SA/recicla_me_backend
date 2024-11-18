@@ -6,5 +6,7 @@ public interface EstadoPublicacaoService {
     EstadoPublicacao getByCodigo( String codigo);
     EstadoPublicacao getEstadoProntaRecolhar();
 
+    EstadoPublicacao getEstadoRecolhido();
+
     EstadoPublicacao getEstadoPendente();
 }

@@ -1,6 +1,7 @@
 package ao.cinapse.recicla_me.core.services.implementacao;
 
 import ao.cinapse.recicla_me.core.http.dtos.PublicacaoDTO;
+import ao.cinapse.recicla_me.core.models.AgendamentoRecolha;
 import ao.cinapse.recicla_me.core.models.Fornecedor;
 import ao.cinapse.recicla_me.core.models.Publicacao;
 import ao.cinapse.recicla_me.core.repositories.PublicacaoRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -102,6 +104,7 @@ public class PublicacaoServiceImpl extends AbstractService<Publicacao, UUID> imp
             page
         );
     }
+
 
 
     public Page<Publicacao> findAllPendentes(Pageable page) throws Exception
